@@ -4,8 +4,9 @@
  * <p>公       司: 金证财富南京科技有限公司</p>
  * <p>版权所有: 版权所有(C)1998-2018</p>
  */
-package com.cloud.cacheL2.bean;
+package com.cloud.cacheL2.config;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import com.cloud.cacheL2.bean.RedisProperties;
 import com.cloud.cacheL2.dao.impl.RedisDaoImplCluster;
 import com.cloud.cacheL2.dao.impl.RedisDaoImplSingle;
 import com.cloud.common.cache.cacheL2.CacheL2Dao;
@@ -34,10 +36,9 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author    zhangxin4
  * @version   3.1.0 2018年9月19日
  */
-@Configuration
-public class RedisConfiguration
+public class RedisConfigurationxxxxx 
 {
-    private static final Logger logger = LoggerFactory.getLogger(RedisConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisConfigurationxxxxx.class);
     
     private RedisProperties redisProperties;
     
