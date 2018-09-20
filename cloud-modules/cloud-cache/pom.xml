@@ -22,7 +22,7 @@
   
   
 	<modules>
-		<module>cloud-cacheL2</module>
-		<module>cloud-cacheL1</module>
+		<module>cloud-cacheL2-redis</module>
+		<module>cloud-cacheL1-ehcache</module>
 	</modules>
 </project>

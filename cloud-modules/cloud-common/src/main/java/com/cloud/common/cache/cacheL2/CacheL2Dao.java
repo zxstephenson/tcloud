@@ -4,7 +4,7 @@
  * <p>公       司: 金证财富南京科技有限公司</p>
  * <p>版权所有: 版权所有(C)1998-2018</p>
  */
-package com.cloud.cacheL2.dao;
+package com.cloud.common.cache.cacheL2;
 
 /**
  * 〈一句话功能简述〉
@@ -13,7 +13,7 @@ package com.cloud.cacheL2.dao;
  * @version   3.1.0 2018年9月19日
  */
 
-public interface RedisDao
+public interface CacheL2Dao
 {
 
 }

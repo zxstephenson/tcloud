@@ -6,7 +6,7 @@
  */
 package com.cloud.cacheL2.dao.impl;
 
-import com.cloud.cacheL2.dao.RedisDao;
+import com.cloud.common.cache.cacheL2.CacheL2Dao;
 
 /**
  * 〈一句话功能简述〉
@@ -15,7 +15,7 @@ import com.cloud.cacheL2.dao.RedisDao;
  * @version   3.1.0 2018年9月19日
  */
 
-public class RedisDaoImplSingle implements RedisDao
+public class RedisDaoImplSingle implements CacheL2Dao
 {
 
 }

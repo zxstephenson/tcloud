@@ -8,7 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
   
-	<artifactId>cloud-cacheL1</artifactId>
+	<artifactId>cloud-cacheL1-ehcache</artifactId>
 	<name>cloud-cacheL1</name>
   
 	<properties>

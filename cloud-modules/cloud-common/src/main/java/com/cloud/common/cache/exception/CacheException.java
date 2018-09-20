@@ -4,7 +4,9 @@
  * <p>公       司: 金证财富南京科技有限公司</p>
  * <p>版权所有: 版权所有(C)1998-2018</p>
  */
-package com.cloud.common.exception;
+package com.cloud.common.cache.exception;
+
+import com.cloud.common.exception.BaseException;
 
 /**
  * 〈一句话功能简述〉

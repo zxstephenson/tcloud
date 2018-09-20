@@ -9,7 +9,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
   
-	<artifactId>cloud-cacheL2</artifactId>
+	<artifactId>cloud-cacheL2-redis</artifactId>
 	<name>cloud-cacheL2</name>
 
 	<properties>

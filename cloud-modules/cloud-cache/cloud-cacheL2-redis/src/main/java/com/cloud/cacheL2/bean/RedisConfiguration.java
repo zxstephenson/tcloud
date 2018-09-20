@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
-import com.cloud.cacheL2.dao.RedisDao;
 import com.cloud.cacheL2.dao.impl.RedisDaoImplCluster;
 import com.cloud.cacheL2.dao.impl.RedisDaoImplSingle;
-import com.cloud.common.exception.CacheException;
+import com.cloud.common.cache.cacheL2.CacheL2Dao;
+import com.cloud.common.cache.exception.CacheException;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
@@ -42,7 +42,7 @@ public class RedisConfiguration
     private RedisProperties redisProperties;
     
     @Bean
-    public RedisDao gerRedisDao(){
+    public CacheL2Dao gerRedisDao(){
         
         if(isCluster()){
             return new RedisDaoImplCluster();
