@@ -22,6 +22,9 @@
     
     <module>cloud-ribbon</module>
     <module>cloud-bus</module>
+    <module>cloud-eureka-server</module>
+    
+    <module>cloud-config-server</module>
   </modules>
   
 </project>

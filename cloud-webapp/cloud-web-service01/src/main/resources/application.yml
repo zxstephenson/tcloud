@@ -1,0 +1,11 @@
+server:
+  port: 8010
+  
+spring:
+  application:
+    name: cloud-web-service01
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/

@@ -1,0 +1,43 @@
+server:
+  port: 9100
+  
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zxstephenson/config.git
+          username: zx_stu@126.com
+          password: github123
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers:
+            - 192.168.8.91:9092
+     
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh     
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /
+  endpoint:
+    health:
+      show-details: always
+
+          
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+      
