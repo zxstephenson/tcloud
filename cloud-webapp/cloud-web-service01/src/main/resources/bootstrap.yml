@@ -6,6 +6,7 @@ eureka:
 spring:
   cloud:
     config:
+#      enabled: false
       label: cloud-web-service01
       discovery:
         enabled: true

@@ -1,4 +1,4 @@
-package com.cloud.listener;
+package com.cloud.config.client.listener;
 
 import org.springframework.beans.BeansException;
 import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * @author    zhangxin4
  * @version   3.1.0 2018年9月21日
  */
-
 @Component
 public class ListenConfigChange implements ApplicationContextAware, ApplicationListener<EnvironmentChangeEvent> 
 {

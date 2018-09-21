@@ -25,6 +25,8 @@
     <module>cloud-eureka-server</module>
     
     <module>cloud-config-server</module>
+    <module>cloud-config-client</module>
+    <module>cloud-search</module>
   </modules>
   
 </project>

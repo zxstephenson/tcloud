@@ -1,9 +1,3 @@
-/**
- * <p>文件名称: TestController.java</p>
- * <p>项目描述: JROS 捷容平台 V3.1</p>
- * <p>公       司: 金证财富南京科技有限公司</p>
- * <p>版权所有: 版权所有(C)1998-2018</p>
- */
 package com.cloud.web.controller;
 
 import java.util.List;
@@ -15,6 +9,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cloud.bean.User;
 
 /**
  * 〈一句话功能简述〉
@@ -32,6 +28,9 @@ public class TestController
     
     @Autowired
     private Environment environment;
+    
+    @Autowired
+    private User user;
     
 
     @RequestMapping("/testDiscoveryClient")
@@ -52,7 +51,9 @@ public class TestController
     
     @RequestMapping("/getProperty/{key}")
     public String getProperty(@PathVariable("key") String key){
-        
+        System.out.println("----------------------");
+        System.out.println("----------------------user = " + user);
+        System.out.println("----------------------");
         return environment.getProperty(key);
     }
     
