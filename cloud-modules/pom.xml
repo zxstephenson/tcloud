@@ -17,7 +17,11 @@
     <module>cloud-gateway</module>
     <module>cloud-common</module>
     <module>cloud-cache</module>
+
+    <module>cloud-service</module>
     
+    <module>cloud-ribbon</module>
+    <module>cloud-bus</module>
   </modules>
   
 </project>
