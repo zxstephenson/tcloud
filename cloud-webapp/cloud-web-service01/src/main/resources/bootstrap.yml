@@ -6,14 +6,14 @@ eureka:
 spring:
   cloud:
     config:
-#      enabled: false
-      label: cloud-web-service01
-      discovery:
-        enabled: true
-        service-id: cloud-config-server
-    stream:
-      default-binder: kafka
-      kafka:
-        binder:
-          brokers:
-            - 192.168.8.91:9092
+      enabled: false
+#      label: cloud-web-service01
+#      discovery:
+#        enabled: true
+#        service-id: cloud-config-server
+#    stream:
+#      default-binder: kafka
+#      kafka:
+#        binder:
+#          brokers:
+#            - 192.168.8.91:9092

@@ -1,16 +1,18 @@
 server:
-  port: 8001
+  port: 8002
   
 spring:
   application:
-    name: cloud-web-service01
+    name: cloud-web-service02
+  
   cloud:
     stream:
       default-binder: kafka
       bindings:
-        broadcastInput:
+        broadcastOutput: 
           destination: broadcastMessage
-        groupMessageInput: 
+            
+        groupMessageOutput: 
           destination: groupMessage
           
       kafka:
@@ -23,7 +25,4 @@ spring:
                 timeout:
                   # 获取metadata的超时时间
                   ms: 2000  
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:9001/eureka/
+      

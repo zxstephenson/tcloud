@@ -1,31 +1,34 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+    
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
 		<groupId>com.cloud</groupId>
-		<artifactId>cloud-parent</artifactId>
+		<artifactId>cloud-bus</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>cloud-web-service02</artifactId>
-	<name>cloud-web-service02</name>
+	<artifactId>cloud-bus-consumer</artifactId>
+	<name>cloud-bus-consumer</name>
 	
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-kafka</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.cloud</groupId>
-			<artifactId>cloud-bus-producer</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<artifactId>cloud-common</artifactId>
 		</dependency>
 	</dependencies>
 </project>

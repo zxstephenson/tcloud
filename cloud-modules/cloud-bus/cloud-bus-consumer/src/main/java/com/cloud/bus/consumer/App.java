@@ -1,4 +1,4 @@
-package com.cloud.ribbon;
+package com.cloud.bus.consumer;
 
 /**
  * Hello world!

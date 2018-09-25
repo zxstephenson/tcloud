@@ -1,4 +1,4 @@
-package com.cloud.bus;
+package com.cloud.bus.producer;
 
 /**
  * Hello world!

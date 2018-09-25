@@ -1,25 +1,30 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+  
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
 		<groupId>com.cloud</groupId>
-		<artifactId>cloud-modules</artifactId>
+		<artifactId>cloud-bus</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>cloud-bus</artifactId>
-	<name>cloud-bus</name>
-
+	<artifactId>cloud-bus-producer</artifactId>
+	<name>cloud-bus-producer</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
-	<packaging>pom</packaging>
-	<modules>
-		<module>cloud-bus-producer</module>
-		<module>cloud-bus-consumer</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-kafka</artifactId>
+		</dependency>
+	</dependencies>
 </project>
