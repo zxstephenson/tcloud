@@ -27,6 +27,7 @@
     <module>cloud-config-server</module>
     <module>cloud-config-client</module>
     <module>cloud-search</module>
+    <module>cloud-registry-discovery</module>
   </modules>
   
 </project>

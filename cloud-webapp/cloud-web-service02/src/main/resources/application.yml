@@ -5,24 +5,31 @@ spring:
   application:
     name: cloud-web-service02
   
-  cloud:
-    stream:
-      default-binder: kafka
-      bindings:
-        broadcastOutput: 
-          destination: broadcastMessage
-            
-        groupMessageOutput: 
-          destination: groupMessage
-          
-      kafka:
-        binder:
-          brokers:
-            - 192.168.8.91:9092
-          configuration:
-            metadata:
-              fetch:
-                timeout:
-                  # 获取metadata的超时时间
-                  ms: 2000  
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch #默认值为elasticsearch，集群的唯一标识
+      cluster-nodes: 127.0.0.1:9300 #多节点用逗号隔开
+      repositories:
+        enabled: true
+  
+#  cloud:
+#    stream:
+#      default-binder: kafka
+#      bindings:
+#        broadcastOutput: 
+#          destination: broadcastMessage2
+#            
+#        groupMessageOutput: 
+#          destination: groupMessage
+#          
+#      kafka:
+#        binder:
+#          brokers:
+#            - 192.168.8.91:9092
+#          configuration:
+#            metadata:
+#              fetch:
+#                timeout:
+#                  # 获取metadata的超时时间
+#                  ms: 2000  
       

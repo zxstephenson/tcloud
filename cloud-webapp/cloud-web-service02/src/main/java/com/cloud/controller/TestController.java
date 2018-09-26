@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cloud.bus.producer.clients.ProducerClient;
+/*import com.cloud.bus.producer.clients.ProducerClient;*/
 
 /**
  * 〈一句话功能简述〉
@@ -16,7 +16,7 @@ import com.cloud.bus.producer.clients.ProducerClient;
 public class TestController
 {
 
-    @Autowired
+   /* @Autowired
     private ProducerClient producerClient;
     
     
@@ -25,5 +25,9 @@ public class TestController
         producerClient.sendBroadcastMessage("hello");
         producerClient.sendGroupMessage("world");
         System.out.println("============================");
-    }
+    }*/
+    
+    
+    
+    
 }

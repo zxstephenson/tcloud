@@ -8,8 +8,8 @@ spring:
     stream:
       default-binder: kafka
       bindings:
-        broadcastInput:
-          destination: broadcastMessage
+        broadcastInput: 
+          destination: broadcastMessage2
         groupMessageInput: 
           destination: groupMessage
           
@@ -21,7 +21,6 @@ spring:
             metadata:
               fetch:
                 timeout:
-                  # 获取metadata的超时时间
                   ms: 2000  
 eureka:
   client:
