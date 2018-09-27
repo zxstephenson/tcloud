@@ -1,0 +1,14 @@
+server:
+  port: 8004
+  
+spring:
+  application:
+    name: helloService
+    
+  cloud:
+    zookeeper:
+      connect-string: 192.168.8.91:2181
+      discovery:
+        instance-host: 192.168.8.91
+        instance-port: ${server.port}
+        instance-id: ${spring.cloud.zookeeper.discovery.instance-host}:${spring.cloud.zookeeper.discovery.instance-port}

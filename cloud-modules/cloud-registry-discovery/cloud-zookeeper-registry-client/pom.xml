@@ -1,55 +1,38 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+  
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
 		<groupId>com.cloud</groupId>
-		<artifactId>cloud-parent</artifactId>
+		<artifactId>cloud-registry-discovery</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>cloud-web-service02</artifactId>
-	<name>cloud-web-service02</name>
+	<artifactId>cloud-zookeeper-registry-client</artifactId>
+	<name>cloud-zookeeper-registry-client</name>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
 	<dependencies>
+		<!-- <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.cloud</groupId>
-			<artifactId>cloud-bus-producer</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+	<!-- 	<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zookeeper-all</artifactId>
 		</dependency> -->
+		
+		
 		<dependency>
-			<groupId>com.cloud</groupId>
-			<artifactId>cloud-elasticSearch</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		
-		
-		<!-- swagger生成接口API -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-
-        <!-- 接口API生成html文档 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.6.1</version>
-        </dependency>
-
-		<!-- zookeeper注册 -->
-		<!-- <dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-zookeeper-all</artifactId>
 		    <exclusions>
@@ -69,13 +52,8 @@
 		            <artifactId>slf4j-log4j12</artifactId>
 		        </exclusion>
 		    </exclusions>
-		</dependency> -->
-
-
-		<dependency>
-			<groupId>com.cloud</groupId>
-			<artifactId>cloud-ribbon</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	
+
 </project>

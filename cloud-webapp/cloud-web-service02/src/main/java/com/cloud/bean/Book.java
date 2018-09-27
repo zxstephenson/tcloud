@@ -9,7 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * @author    zhangxin4
  * @version   3.1.0 2018年9月25日
  */
-@Document(indexName="product", type="book")
+@Document(indexName="user", type="book")
 public class Book
 {
     

@@ -11,7 +11,17 @@ spring:
       cluster-nodes: 127.0.0.1:9300 #多节点用逗号隔开
       repositories:
         enabled: true
-  
+
+#  cloud:
+#    zookeeper:
+#      connect-string: 192.168.8.91:2181
+#      connect-string: 192.168.8.167:2181,192.168.8.168:2181,192.168.8.169:2181
+#      discovery:
+#        instance-host: 192.168.8.91
+#        instance-port: ${server.port}
+#        instance-id: ${spring.cloud.zookeeper.discovery.instance-host}:${spring.cloud.zookeeper.discovery.instance-port}
+
+ 
 #  cloud:
 #    stream:
 #      default-binder: kafka

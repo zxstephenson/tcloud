@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
-import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,6 +47,13 @@ public class BookController
      */
     @GetMapping("/select/{q}")
     public List<Book> search(@PathVariable String q){
+        
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        QueryBuilder queryBuilder = QueryBuilders.queryStringQuery("hello");
+        SearchQuery searchQuery = nativeSearchQueryBuilder.withQuery(queryBuilder).build();
+        
+        bookDao.search(searchQuery);
+        
         QueryStringQueryBuilder builder = new QueryStringQueryBuilder(q);
         Iterable<Book> searchResult = bookDao.search(builder);
         Iterator<Book> iterator = searchResult.iterator();
@@ -60,7 +66,11 @@ public class BookController
     
     @GetMapping("/{page}/{size}/{q}")
     public List<Book> searchCity(@PathVariable Integer page, 
-            @PathVariable Integer size, @PathVariable String q) {/*
+            @PathVariable Integer size, @PathVariable String q) {
+        
+        // 分页参数
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "weight");
+        /*
 
         // 分页参数
         Pageable pageable = new PageRequest(page, size);
