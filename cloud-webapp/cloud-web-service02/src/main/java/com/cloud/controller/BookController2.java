@@ -20,7 +20,6 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.bean.Book;
 
@@ -30,7 +29,6 @@ import com.cloud.bean.Book;
  * @author    zhangxin4
  * @version   3.1.0 2018年9月25日
  */
-@RestController
 public class BookController2
 {
     @Autowired
@@ -83,7 +81,7 @@ public class BookController2
     @RequestMapping("/test02")
     public List<Book> test02(String word, 
             @PageableDefault(sort="name", direction=Direction.DESC) Pageable pageable){
-        
+
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.queryStringQuery(word))
                 .withPageable(pageable)
@@ -100,8 +98,8 @@ public class BookController2
     public List<Book> test03(String id, String name, @PageableDefault Pageable pageable){
         
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                                    .withQuery(QueryBuilders.matchQuery("id", id))
-//                                    .withQuery(QueryBuilders.matchQuery("name", name))
+//                                    .withQuery(QueryBuilders.matchQuery("id", id))
+                                    .withQuery(QueryBuilders.matchQuery("name", name))
                                     .withPageable(pageable)
                                     .build();
         return elasticsearchTemplate.queryForList(searchQuery, Book.class);

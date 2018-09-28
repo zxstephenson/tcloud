@@ -5,9 +5,11 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cloud.bean.Book;
 import com.cloud.ribbon.client.RibbonClient;
 
 /*import com.cloud.bus.producer.clients.ProducerClient;*/
@@ -47,5 +49,14 @@ public class TestController
         return result;
     }
     
+    
+    public static void main(String[] args){
+        
+        Document document = Book.class.getAnnotation(Document.class);
+        System.out.println("document = " + document);
+        System.out.println("indexName = " + document.indexName());
+        System.out.println("type = " + document.type());
+        
+    }
     
 }
