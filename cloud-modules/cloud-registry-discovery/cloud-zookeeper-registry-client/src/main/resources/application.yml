@@ -12,3 +12,5 @@ spring:
         instance-host: 192.168.8.91
         instance-port: ${server.port}
         instance-id: ${spring.cloud.zookeeper.discovery.instance-host}:${spring.cloud.zookeeper.discovery.instance-port}
+        metadata:
+          apicode: 1001

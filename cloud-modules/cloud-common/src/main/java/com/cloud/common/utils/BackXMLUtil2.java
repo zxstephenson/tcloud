@@ -24,19 +24,42 @@ import org.jdom2.input.SAXBuilder;
  * @version 3.1.0 2018年10月23日
  */
 
-public class XMLUtil
+public class BackXMLUtil2
 {
     /**
      * 解析request流对象InputStream 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
      */
     
     @SuppressWarnings("all") 
-    public static Document doXMLParse(InputStream is)
+    public static Map<String, String> doXMLParse(InputStream is)
             throws JDOMException, IOException
     {
+        Map<String, String> m = new HashMap<String, String>();
         SAXBuilder builder = new SAXBuilder();
+//        InputStream is = new FileInputStream(); 
         Document doc = builder.build(is);
-        return doc;
+        Element root = doc.getRootElement();
+        List<Element> list = root.getChildren();
+        Iterator<Element> it = list.iterator();
+        while (it.hasNext())
+        {
+            Element e = (Element) it.next();
+            String k = e.getName();
+            String v = "";
+            List children = e.getChildren();
+            if (children.isEmpty())
+            {
+                v = e.getTextNormalize();
+            } else
+            {
+                v = BackXMLUtil2.getChildrenText(children);
+            }
+
+            m.put(k, v);
+        }
+
+        is.close();
+        return m;
     }
      
 
@@ -45,7 +68,7 @@ public class XMLUtil
      * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
      */
     @SuppressWarnings("all")
-    public static Document doXMLParse(final String strxml)
+    public static Map<String, String> doXMLParse(final String strxml)
             throws JDOMException
     {
         if (null == strxml || "".equals(strxml))
@@ -57,14 +80,34 @@ public class XMLUtil
         InputStream in = null;
         try
         {
-            in = new ByteArrayInputStream(strxml.getBytes());
+            in = new ByteArrayInputStream(strxml.getBytes("UTF-8"));
             SAXBuilder builder = new SAXBuilder();
-            return builder.build(in);
-            
-        } catch (Exception e)
+            Document doc = builder.build(in);
+            Element root = doc.getRootElement();
+            List list = root.getChildren();
+            Iterator it = list.iterator();
+            while (it.hasNext())
+            {
+                Element e = (Element) it.next();
+                String k = e.getName();
+                String v = "";
+                List children = e.getChildren();
+                if (children.isEmpty())
+                {
+                    v = e.getTextNormalize();
+                } else
+                {
+                    v = BackXMLUtil2.getChildrenText(children);
+                }
+                m.put(k, v);
+            }
+        } catch (UnsupportedEncodingException e)
         {
             e.printStackTrace();
-        }  finally{
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        } finally{
             if(in != null)
             {
                 // 关闭流
@@ -77,7 +120,11 @@ public class XMLUtil
                 }
             }
         }
-        return null;
+        
+
+        
+
+        return m;
     }
 
     /**
@@ -99,7 +146,7 @@ public class XMLUtil
                 sb.append("<" + name + ">");
                 if (!list.isEmpty())
                 {
-                    sb.append(XMLUtil.getChildrenText(list));
+                    sb.append(BackXMLUtil2.getChildrenText(list));
                 }
                 sb.append(value);
                 sb.append("</" + name + ">");

@@ -41,6 +41,31 @@
 			</dependency>
 			<dependency>
 				<groupId>com.cloud</groupId>
+	  			<artifactId>cloud-context</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+	  			<artifactId>cloud-bus-consumer</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+	  			<artifactId>cloud-bus-producer</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+	  			<artifactId>cloud-ribbon</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+	  			<artifactId>cloud-search</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
 	  			<artifactId>cloud-cacheL1</artifactId>
 				<version>${cloud.version}</version>
 			</dependency>
