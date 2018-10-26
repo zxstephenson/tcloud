@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	<interface code="1001" aliasCode="1001" desc="根据ID查询账户" type="bean" uri="userServiceImpl:createUser" >
+        <inputs>
+            <input code="id" type="int" desc="id"/>
+            <input code="age" type="int" desc="年龄"/>
+            <input code="feature" type="java.util.Map" desc="属性"/>
+            <input code="map" type="java.util.Map" desc="map"/>
+            <!-- <input code="list" type="java.util.List" desc="list"/> -->
+        </inputs>
+    </interface>
+    
+    <interface code="1002" desc="获取用户名" type="bean" uri="userServiceImpl:getUsername">
+    	<inputs>
+			<input code="id" type="int"/>    	
+			<input code="list" type="java.util.List"/>
+    	</inputs>
+    </interface>
+    
+    <interface code="1003" desc="获取用户名" type="bean" uri="userServiceImpl:test01">
+    	<inputs>
+    	</inputs>
+    </interface>
+</root>

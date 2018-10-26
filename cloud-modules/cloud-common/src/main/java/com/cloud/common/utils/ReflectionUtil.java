@@ -16,6 +16,8 @@ import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 
 public class ReflectionUtil
 {
+    private static LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+    
     /** 
      * 循环向上转型, 获取Method对象 
      * @param object : 子类对象 
@@ -50,11 +52,18 @@ public class ReflectionUtil
      * @param parameters : 父类中的方法参数 
      * @return 父类中方法的执行结果 
      */  
-    public static Object invokeMethod(Object object, String methodName, Class<?> [] parameterTypes,  
+    public static Object invokeMethod(Object object, String methodName, Class<?>[] parameterTypes,  
             Object [] parameters) 
     {
         //根据 对象、方法名和对应的方法参数 通过取 Method 对象  
-        Method method = getDeclaredMethod(object, methodName, parameterTypes);
+        Method method = null;
+        if(parameterTypes == null)
+        {
+            method = getDeclaredMethod(object, methodName);   
+        }else
+        {
+            method = getDeclaredMethod(object, methodName, parameterTypes);
+        }
         
         //抑制Java对方法进行检查,主要是针对私有方法而言  
         method.setAccessible(true);
@@ -63,9 +72,14 @@ public class ReflectionUtil
         {
             if(null != method)
             {
-                
                 //调用object 的 method 所代表的方法，其方法的参数是 parameters
-                return method.invoke(object, parameters);
+                if(parameters == null)
+                {
+                    return method.invoke(object);                    
+                }else
+                {
+                    return method.invoke(object, parameters);
+                }
             }
         } catch (IllegalArgumentException e) 
         {
@@ -94,7 +108,7 @@ public class ReflectionUtil
         {
             if (methodName.equals(method.getName())) 
             {
-                return getParamterName(clazz, method);
+                return getParamterName(method);
             }
         }
         return null;
@@ -106,11 +120,14 @@ public class ReflectionUtil
      * @param method
      * @return
      */
-    public static List<String> getParamterName(Class<?> clazz, Method method) 
+    public static List<String> getParamterName(Method method) 
     {
-        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
         //获取到指定方法的所有参数名
         String[] params = u.getParameterNames(method);
+        if(params == null)
+        {
+            return null;
+        }
         return Arrays.asList(params);
     }
     
@@ -168,22 +185,23 @@ public class ReflectionUtil
         
         //根据 对象和属性名通过取 Field对象  
         Field field = getDeclaredField(object, fieldName) ;  
-        
-        //抑制Java对其的检查  
-        field.setAccessible(true) ;  
-        
-        try 
+        if(field != null)
         {
-            //将 object 中 field 所代表的值 设置为 value  
-            field.set(object, value);  
-        } catch (IllegalArgumentException e)
-        {
-            e.printStackTrace();  
-        } catch (IllegalAccessException e)
-        {
-            e.printStackTrace();  
-        }  
-          
+          //抑制Java对其的检查  
+            field.setAccessible(true) ;  
+            
+            try 
+            {
+                //将 object 中 field 所代表的值 设置为 value  
+                field.set(object, value);  
+            } catch (IllegalArgumentException e)
+            {
+                e.printStackTrace();  
+            } catch (IllegalAccessException e)
+            {
+                e.printStackTrace();  
+            }  
+        }
     }  
       
     /** 
@@ -197,16 +215,20 @@ public class ReflectionUtil
         //根据 对象和属性名通过取 Field对象  
         Field field = getDeclaredField(object, fieldName) ;  
         
-        //抑制Java对其的检查  
-        field.setAccessible(true) ;  
-        
-        try 
+        if(field != null)
         {
-            //获的属性值  
-            return field.get(object) ;  
-        } catch(Exception e)
-        {
-            e.printStackTrace() ;  
+          //抑制Java对其的检查  
+            field.setAccessible(true) ;  
+            
+            try 
+            {
+                //获的属性值  
+                return field.get(object) ;  
+            } catch(Exception e)
+            {
+                e.printStackTrace() ;  
+            }
+            
         }
         
         return null;  

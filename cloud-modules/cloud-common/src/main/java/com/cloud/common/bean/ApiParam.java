@@ -274,14 +274,4 @@ public class ApiParam implements Serializable
         this.decimalMin = decimalMin;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ApiParam [id=" + id + ", apiCode=" + apiCode + ", code=" + code
-                + ", desc=" + desc + ", type=" + type + ", max=" + max
-                + ", min=" + min + ", size=" + size + ", length=" + length
-                + ", nullable=" + nullable + ", decimalMax=" + decimalMax
-                + ", decimalMin=" + decimalMin + "]";
-    }
-    
 }

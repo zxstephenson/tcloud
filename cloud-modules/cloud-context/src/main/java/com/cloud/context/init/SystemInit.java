@@ -1,4 +1,4 @@
-package com.cloud.context;
+package com.cloud.context.init;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cloud.common.context.SystemStarted;
+import com.cloud.context.ContextHolder;
 import com.cloud.context.configuration.ContextProperties;
 
 /**

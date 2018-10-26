@@ -1,4 +1,4 @@
-package com.cloud.context.api;
+package com.cloud.access.api;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +16,9 @@ import org.springframework.util.ClassUtils;
 import com.cloud.common.access.ApiMetaParse;
 import com.cloud.common.bean.Api;
 import com.cloud.common.bean.ApiParam;
+import com.cloud.common.bean.ApiType;
 import com.cloud.common.utils.ReflectionUtil;
+import com.cloud.common.utils.StringUtil;
 import com.cloud.common.utils.XMLUtil;
 import com.cloud.context.configuration.ContextProperties;
 
@@ -27,8 +29,8 @@ import com.cloud.context.configuration.ContextProperties;
  * @author    zhangxin4
  * @version   3.1.0 2018年10月23日
  */
-@Component("apiMetaXmlImpl")
-public class ApiMetaXMLImpl implements ApiMetaParse
+@Component("apiMetaXmlParseImpl")
+public class ApiMetaXMLParseImpl implements ApiMetaParse
 {
     @Autowired
     private ContextProperties contextProperties;
@@ -49,26 +51,47 @@ public class ApiMetaXMLImpl implements ApiMetaParse
             List<Element> interfaces = root.getChildren("interface");
             interfaces.stream().forEach(item -> {
                 Api api = new Api();
-                //设置接口信息
-                setObjectAttr(item.getAttributes(), api);
-                //设置输入参数
-                Element inputsElement = item.getChild("inputs");
-                //参数信息
-                List<Element> inputs = inputsElement.getChildren("input");
-                List<ApiParam> inputParams = new ArrayList<>();
-                inputs.stream().forEach(input -> {
-                    ApiParam apiParam = new ApiParam();
-                    setObjectAttr(input.getAttributes(), apiParam);
-                    inputParams.add(apiParam);
-                });
-                api.setInputParams(inputParams);
-                listApi.add(api);
+                String type = item.getAttributeValue("type");
+                ApiType apiType = ApiType.getApiType(type);
+                if(apiType != ApiType.UNDEFINED)
+                {
+                    //type是一个枚举类型，需单独处理，然后将type属性从元素中删除
+                    api.setType(apiType);
+                    item.removeAttribute("type");
+                    
+                    //设置接口信息
+                    setObjectAttr(item.getAttributes(), api);
+                    
+                    if(apiType == ApiType.BEAN && StringUtil.isNotEmpty(api.getUri()))
+                    {
+                        String uri = api.getUri();
+                        if(uri.contains(":"))
+                        {
+                            api.setInstanceName(uri.split(":")[0]);
+                            api.setMethodName(uri.split(":")[1]);
+                        }
+                    }
+                    
+                    //设置输入参数
+                    Element inputsElement = item.getChild("inputs");
+                    //参数信息
+                    List<Element> inputs = inputsElement.getChildren("input");
+                    List<ApiParam> inputParams = new ArrayList<>();
+                    inputs.stream().forEach(input -> {
+                        ApiParam apiParam = new ApiParam();
+                        apiParam.setApiCode(api.getCode());
+                        setObjectAttr(input.getAttributes(), apiParam);
+                        inputParams.add(apiParam);
+                    });
+                    api.setInputParams(inputParams);
+                    listApi.add(api);
+                }
             });
             
             System.err.println("*************************");
             System.err.println("*************************listApi = " + listApi);
             System.err.println("*************************");
-            
+            return listApi;
         } catch (Exception e)
         {
             e.printStackTrace();

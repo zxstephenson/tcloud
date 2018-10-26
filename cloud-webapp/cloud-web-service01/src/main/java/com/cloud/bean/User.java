@@ -13,6 +13,24 @@ public class User
     private int id;
     
     private String username;
+    
+    private int age;
+
+    /**
+     * @return the age
+     */
+    public int getAge()
+    {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
 
     /**
      * @return the id
@@ -49,7 +67,8 @@ public class User
     @Override
     public String toString()
     {
-        return "User [id=" + id + ", username=" + username + "]";
+        return "User [id=" + id + ", username=" + username + ", age=" + age
+                + "]";
     }
-    
+
 }

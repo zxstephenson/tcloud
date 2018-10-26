@@ -4,7 +4,7 @@
  * <p>公       司: 金证财富南京科技有限公司</p>
  * <p>版权所有: 版权所有(C)1998-2018</p>
  */
-package com.cloud.context;
+package com.cloud.context.init;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;

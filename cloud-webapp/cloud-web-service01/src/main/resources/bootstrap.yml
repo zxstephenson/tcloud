@@ -1,12 +1,11 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:9001/eureka/
-      
-spring:
-  cloud:
-    config:
-      enabled: false
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:9001/eureka/     
+#spring:
+#  cloud:
+#    config:
+#      enabled: false
 #      label: cloud-web-service01
 #      discovery:
 #        enabled: true
@@ -17,3 +16,5 @@ spring:
 #        binder:
 #          brokers:
 #            - 192.168.8.91:9092
+
+

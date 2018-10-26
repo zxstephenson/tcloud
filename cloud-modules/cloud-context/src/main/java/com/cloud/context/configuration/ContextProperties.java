@@ -58,7 +58,7 @@ public class ContextProperties
         
         private String location = "";
         
-        private String apiMetaImpl = "apiMetaXmlImpl";
+        private String apiMetaImpl = "apiMetaXmlParseImpl";
 
         /**
          * @return the location

@@ -31,7 +31,7 @@ public class Api implements Serializable
     /**
      * 接口编号
      */
-    private String apiCode;
+    private String code;
 
     /**
      * 接口别名
@@ -41,7 +41,7 @@ public class Api implements Serializable
     /**
      * 接口中文名
      */
-    private String apiDesc;
+    private String desc;
 
     /**
      * 接口类型
@@ -100,19 +100,19 @@ public class Api implements Serializable
     }
 
     /**
-     * @return the apiCode
+     * @return the code
      */
-    public String getApiCode()
+    public String getCode()
     {
-        return apiCode;
+        return code;
     }
 
     /**
-     * @param apiCode the apiCode to set
+     * @param code the code to set
      */
-    public void setApiCode(String apiCode)
+    public void setCode(String code)
     {
-        this.apiCode = apiCode;
+        this.code = code;
     }
 
     /**
@@ -132,19 +132,19 @@ public class Api implements Serializable
     }
 
     /**
-     * @return the apiDesc
+     * @return the desc
      */
-    public String getApiDesc()
+    public String getDesc()
     {
-        return apiDesc;
+        return desc;
     }
 
     /**
-     * @param apiDesc the apiDesc to set
+     * @param desc the desc to set
      */
-    public void setApiDesc(String apiDesc)
+    public void setDesc(String desc)
     {
-        this.apiDesc = apiDesc;
+        this.desc = desc;
     }
 
     /**
@@ -275,16 +275,4 @@ public class Api implements Serializable
         this.inputParams = inputParams;
     }
 
-    @Override
-    public String toString()
-    {
-        return "Api [id=" + id + ", apiCode=" + apiCode + ", aliasCode="
-                + aliasCode + ", apiDesc=" + apiDesc + ", type=" + type
-                + ", timeout=" + timeout + ", serviceId=" + serviceId
-                + ", instanceName=" + instanceName + ", methodName="
-                + methodName + ", enable=" + enable + ", uri=" + uri
-                + ", inputParams=" + inputParams + "]";
-    }
-
-    
 }

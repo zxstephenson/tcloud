@@ -9,5 +9,27 @@ package com.cloud.common.bean;
 
 public enum ApiType
 {
-    BUS,RIBBON,BEAN
+    BUS("bus"),
+    RIBBON("ribbon"),
+    BEAN("bean"),
+    UNDEFINED("undefined");
+    
+    ApiType(String value){
+        
+    }
+    
+    public static ApiType getApiType(String type)
+    {
+        switch(type.toLowerCase())
+        {
+            case "bus":
+                return BUS;
+            case "ribbon":
+                return RIBBON;
+            case "bean":
+                return BEAN;
+        }
+        
+        return UNDEFINED;
+    }
 }
