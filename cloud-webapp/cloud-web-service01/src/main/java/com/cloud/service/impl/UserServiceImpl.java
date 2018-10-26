@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cloud.access.RequestAspect;
 import com.cloud.bean.User;
 import com.cloud.common.annotation.DefineApi;
+import com.cloud.common.cache.cacheL1.CacheL1Dao;
 import com.cloud.common.utils.JsonUtil;
 import com.cloud.common.utils.ReflectionUtil;
 import com.cloud.service.UserService;
@@ -24,6 +26,9 @@ import com.cloud.service.UserService;
 public class UserServiceImpl implements UserService
 {
     private static final Map<Integer, User> users = new HashMap<Integer, User>();
+    
+    @Autowired
+    private CacheL1Dao cacheL1Client;
     
     @Override
     @DefineApi("username")
@@ -48,13 +53,8 @@ public class UserServiceImpl implements UserService
     
     @Override
     public void test01(){
-        RequestAspect a = new RequestAspect();
-        Method[] methods = a.getClass().getMethods();
-        for(Method method :  methods){
-            
-            List<String> list = ReflectionUtil.getParamterName(method);
-            System.out.println(" list = ==>" + list);
-        }
+        Object username = cacheL1Client.get("myEhcache", "username");
+        System.out.println("username =====>" + username);
     }
 
 }

@@ -1,0 +1,10 @@
+server:
+  port: 9001
+ 
+spring:
+  application:
+    name: cloud-service03
+    
+jisp:
+  api:
+    package-path: com.cloud.service

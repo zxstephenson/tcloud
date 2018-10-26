@@ -1,0 +1,40 @@
+<?xml version="1.0"?>  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+           targetNamespace="http://com.cloud.api"  
+           xmlns="http://com.cloud.api"  
+           elementFormDefault="qualified">  
+  
+    <xs:element name="note">  
+        <xs:complexType>  
+            <xs:sequence>
+                <xs:element name="to" type="xs:string"/>  
+                <xs:element name="from" type="xs:string"/>  
+                <xs:element name="heading" type="xs:string"/>  
+                <xs:element name="body" type="xs:string"/> 
+                <xs:element name="age" type="xs:int"></xs:element>
+				<xs:element name="interface"> 
+		<xs:complexType> 
+			<xs:sequence> 
+				<xs:element name="publicparams" maxOccurs="unbounded"> 
+					<xs:complexType> 
+						<xs:sequence> 
+							<xs:element name="param" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType> 
+									<xs:attribute name="key" type="xs:string" /> 
+									<xs:attribute name="value" type="xs:string" /> 
+								</xs:complexType> 
+							</xs:element> 
+						</xs:sequence> 
+						<xs:attribute name="code" type="xs:string" default="default"/> 
+					</xs:complexType> 
+				</xs:element> 
+			</xs:sequence> 
+		</xs:complexType> 
+	</xs:element>
+            </xs:sequence>  
+        </xs:complexType>  
+    </xs:element>
+  
+  	
+  
+</xs:schema>  
