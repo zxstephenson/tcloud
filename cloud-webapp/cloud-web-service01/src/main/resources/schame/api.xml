@@ -1,0 +1,17 @@
+<?xml version="1.0"?>  
+<note xmlns="http://com.cloud.api"  
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:schemaLocation="classpath:/META-INF/api.xsd">
+
+  <to></to>
+  <from></from>
+  <heading></heading>
+  <body></body>
+<age></age>
+  <interface>
+  	<publicparams code="default">
+  		<param />
+  	</publicparams>
+  </interface>
+    
+</note>  
