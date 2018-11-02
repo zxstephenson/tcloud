@@ -14,6 +14,25 @@ public class Page
     private int pageSize = 20;
 
     /**
+     * 
+     */
+    public Page()
+    {
+        super();
+    }
+
+    /**
+     * @param pageNo
+     * @param pageSize
+     */
+    public Page(int pageNo, int pageSize)
+    {
+        super();
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+    }
+
+    /**
      * @return the pageNo
      */
     public int getPageNo()

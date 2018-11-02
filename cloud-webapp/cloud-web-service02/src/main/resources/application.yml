@@ -7,8 +7,8 @@ spring:
   
   data:
     elasticsearch:
-      cluster-name: elasticsearch #默认值为elasticsearch，集群的唯一标识
-      cluster-nodes: 127.0.0.1:9300 #多节点用逗号隔开
+      cluster-name: msa-yhjj #默认值为elasticsearch，集群的唯一标识
+      cluster-nodes: 192.168.8.168:9300,192.168.8.169:9300 #多节点用逗号隔开
       repositories:
         enabled: true
 

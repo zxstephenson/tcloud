@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.bean.Book;
 import com.cloud.bean.Customer;
+import com.cloud.common.search.bean.Page;
 import com.cloud.common.search.bean.SearchRequestData;
 import com.cloud.common.search.dao.EsDao;
 import com.cloud.common.search.exception.SearchException;
@@ -50,7 +52,6 @@ public class BookController3
         return esClient.matchQuery(searchRequestData, Customer.class);
     }
     
-    
     @RequestMapping("/matchPhraseQuery")
     public Object matchPhraseQuery(String key, String value) throws SearchException{
         SearchRequestData searchRequestData = new SearchRequestData();
@@ -79,7 +80,17 @@ public class BookController3
         return esClient.multiMatchQuery(searchRequestData, Book.class);
     }
     
-    
+    @RequestMapping("/queryHystrixInfo/{value}/{pageSize}/{pageNo}")
+    public Object queryHystrixInfo(@PathVariable String value,
+            @PathVariable int pageSize, @PathVariable int pageNo) throws SearchException{
+        SearchRequestData searchRequestData = new SearchRequestData();
+        searchRequestData.setIndexName("hystrix-2018-10-29");
+        searchRequestData.setQueryString(value);
+        searchRequestData.setTypeName("hystrix");
+        Page page = new Page(pageSize, pageNo);
+        searchRequestData.setPage(page);
+        return esClient.queryStringQuery(searchRequestData, Object.class);
+    }
     
    /* 
     @RequestMapping("/boolQuery")
