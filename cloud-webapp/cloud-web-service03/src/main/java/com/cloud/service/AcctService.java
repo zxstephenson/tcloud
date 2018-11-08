@@ -2,7 +2,7 @@ package com.cloud.service;
 
 import org.springframework.stereotype.Service;
 
-import com.cloud.annotation.Api;
+import com.cloud.common.annotation.DefineApi;
 
 /**
  * 〈一句话功能简述〉
@@ -14,7 +14,7 @@ import com.cloud.annotation.Api;
 public class AcctService
 {
 
-    @Api
+    @DefineApi
     public boolean createAcct(){
         
         return true;

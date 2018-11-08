@@ -3,6 +3,7 @@ package com.cloud.ribbon.client;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,7 +33,12 @@ public class RibbonClient
     public ResponseData remoteForPost(String serviceId, RequestData requestData){
         StringBuilder url = new StringBuilder();
         url.append("http://").append(serviceId).append("/service");
-        return restTemplate.postForObject(url.toString(), requestData, ResponseData.class);
+//        return restTemplate.postForObject(url.toString(), requestData, ResponseData.class);
+        ResponseEntity<ResponseData> responseEntity = restTemplate.postForEntity(url.toString(), requestData, ResponseData.class);
+        System.err.println("*************");
+        System.err.println("*************getStatusCodeValue = " + responseEntity.getStatusCodeValue());
+        System.err.println("*************");
+        return responseEntity.getBody();
     }
 
     /**

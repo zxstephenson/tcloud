@@ -56,25 +56,11 @@ public class ContextProperties
 
     public static class Api{
         
-        private String location = "";
+        private String metaLocation = "";
         
         private String apiMetaImpl = "apiMetaXmlParseImpl";
-
-        /**
-         * @return the location
-         */
-        public String getLocation()
-        {
-            return location;
-        }
-
-        /**
-         * @param location the location to set
-         */
-        public void setLocation(String location)
-        {
-            this.location = location;
-        }
+        
+        private List<String> basePackagePath = new ArrayList<String>();
 
         /**
          * @return the apiMetaImpl
@@ -92,20 +78,55 @@ public class ContextProperties
             this.apiMetaImpl = apiMetaImpl;
         }
 
+        /**
+         * @return the metaLocation
+         */
+        public String getMetaLocation()
+        {
+            return metaLocation;
+        }
+
+        /**
+         * @param metaLocation the metaLocation to set
+         */
+        public void setMetaLocation(String metaLocation)
+        {
+            this.metaLocation = metaLocation;
+        }
+        
+        /**
+         * @return the basePackagePath
+         */
+        public List<String> getBasePackagePath()
+        {
+            return basePackagePath;
+        }
+
+        /**
+         * @param basePackagePath the basePackagePath to set
+         */
+        public void setBasePackagePath(List<String> basePackagePath)
+        {
+            this.basePackagePath = basePackagePath;
+        }
+
         @Override
         public String toString()
         {
-            return "Api [location=" + location + ", parseApiMeta="
-                    + apiMetaImpl + "]";
-        } 
-        
+            return "Api [metaLocation=" + metaLocation + ", apiMetaImpl="
+                    + apiMetaImpl + ", basePackagePath=" + basePackagePath
+                    + "]";
+        }
+
     }
+
+
 
     @Override
     public String toString()
     {
-        return "ContextProperties [api=" + api + "]";
+        return "ContextProperties [api=" + api + ", systemInit=" + systemInit
+                + "]";
     }
-    
     
 }

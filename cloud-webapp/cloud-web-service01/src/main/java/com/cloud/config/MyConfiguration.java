@@ -4,7 +4,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.cloud.bean.User;
+import com.cloud.common.bean.User;
 
 /**
  * 〈一句话功能简述〉

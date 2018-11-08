@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cloud.bean.User;
+import com.cloud.common.bean.User;
 
 /**
  * 〈一句话功能简述〉

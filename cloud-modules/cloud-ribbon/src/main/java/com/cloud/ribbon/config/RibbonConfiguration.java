@@ -1,5 +1,9 @@
 package com.cloud.ribbon.config;
 
+import java.net.SocketTimeoutException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +11,11 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.retry.RetryPolicy;
+import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.web.client.RestTemplate;
+
+import com.netflix.client.DefaultLoadBalancerRetryHandler;
 
 /**
  * 〈一句话功能简述〉
@@ -21,6 +29,13 @@ public class RibbonConfiguration
     @Autowired
     private RibbonProperties ribbonProperties;
     
+   /* @Bean
+    public RetryPolicy getRetryPolicy(){
+        Map<Class<? extends Throwable>, Boolean> retryableExceptions = new HashMap<Class<? extends Throwable>, Boolean>();
+        retryableExceptions.put(SocketTimeoutException.class, true);
+        return new SimpleRetryPolicy(2, retryableExceptions);
+    }
+    */
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate()
@@ -47,7 +62,10 @@ public class RibbonConfiguration
                 httpRequestFactory.setReadTimeout(readTimeout);
             }
         }
-        return new RestTemplate(httpRequestFactory);
+        
+        RestTemplate restTemplate = new RestTemplate(httpRequestFactory);
+//        restTemplate.setErrorHandler(errorHandler);
+        return restTemplate;
     }
     
 }

@@ -6,12 +6,21 @@ eureka:
     service-url:
       defaultZone: http://localhost:9001/eureka/
 
+ribbon:
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 0
+  OkToRetryOnAllOperations: true
+#  retryableStatusCodes: 404,403,503
+  
 tcloud:
+  ribbon:
+    connection-timeout: 1000
+    read-timeout: 2000
   context:
     system-init: 
       - apiInit
-    api:
-      location: data/api.xml
+#    api: 
+#      meta-location: data/api.xml
      
 #tcloud:
 #  context:
@@ -20,7 +29,7 @@ tcloud:
 
 spring:
   application:
-    name: cloud-web-service01
+    name: cloud-service01
     
   redis:
     host: 192.168.8.176

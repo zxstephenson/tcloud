@@ -3,7 +3,7 @@ package com.cloud.service;
 import java.util.List;
 import java.util.Map;
 
-import com.cloud.bean.User;
+import com.cloud.common.bean.User;
 
 /**
  * 〈一句话功能简述〉

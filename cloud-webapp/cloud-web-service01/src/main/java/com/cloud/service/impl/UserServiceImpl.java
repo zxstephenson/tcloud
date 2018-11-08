@@ -1,6 +1,5 @@
 package com.cloud.service.impl;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cloud.access.RequestAspect;
-import com.cloud.bean.User;
 import com.cloud.common.annotation.DefineApi;
+import com.cloud.common.bean.User;
 import com.cloud.common.cache.cacheL1.CacheL1Dao;
 import com.cloud.common.utils.JsonUtil;
-import com.cloud.common.utils.ReflectionUtil;
 import com.cloud.service.UserService;
 
 /**

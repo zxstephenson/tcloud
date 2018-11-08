@@ -34,7 +34,7 @@ public class BeanDispatcherImpl implements DispatcherService
                 ApiType apiType = api.getType();
                 if(ApiType.BEAN == apiType)
                 {
-                    BeanClient.dispatch(requestData);
+                    return BeanClient.dispatch(requestData);
                 }
             }
         }

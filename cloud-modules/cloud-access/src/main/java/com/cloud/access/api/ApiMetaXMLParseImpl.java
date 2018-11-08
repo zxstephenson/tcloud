@@ -9,10 +9,13 @@ import java.util.List;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 
+import com.cloud.access.RequestAspect;
 import com.cloud.common.access.ApiMetaParse;
 import com.cloud.common.bean.Api;
 import com.cloud.common.bean.ApiParam;
@@ -32,13 +35,19 @@ import com.cloud.context.configuration.ContextProperties;
 @Component("apiMetaXmlParseImpl")
 public class ApiMetaXMLParseImpl implements ApiMetaParse
 {
+    private static final Logger logger = LoggerFactory.getLogger(ApiMetaXMLParseImpl.class);
     @Autowired
     private ContextProperties contextProperties;
 
     @Override
     public List<Api> parse()
     {
-        String xmlPath = contextProperties.getApi().getLocation();
+        String xmlPath = contextProperties.getApi().getMetaLocation();
+        if(StringUtil.isEmpty(xmlPath))
+        {
+            return new ArrayList<Api>();
+        }
+        
         String path = ClassUtils.getDefaultClassLoader().getResource(xmlPath).getPath();
         InputStream is = null;
         try
@@ -88,9 +97,9 @@ public class ApiMetaXMLParseImpl implements ApiMetaParse
                 }
             });
             
-            System.err.println("*************************");
-            System.err.println("*************************listApi = " + listApi);
-            System.err.println("*************************");
+            logger.info("*************************");
+            logger.info("*************************listApi = " + listApi);
+            logger.info("*************************");
             return listApi;
         } catch (Exception e)
         {
@@ -119,6 +128,5 @@ public class ApiMetaXMLParseImpl implements ApiMetaParse
             ReflectionUtil.setFieldValue(obj, attrName, attrValue);
         });
     }
-    
     
 }

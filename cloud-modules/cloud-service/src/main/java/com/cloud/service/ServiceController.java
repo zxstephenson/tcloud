@@ -26,11 +26,23 @@ public class ServiceController
     @RequestMapping(value="/service", method=RequestMethod.POST)
     public Object service(@RequestBody RequestData requestData){
         
-        System.err.println("service invoked!!!!" + JsonUtil.beanToJson(requestData));
+        System.out.println("serviceController invoked!!!");
         
-        dispatcherService.dispatch(requestData);
+        try
+        {
+            Thread.sleep(3000);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
         
-        return null;
+//        System.err.println("service invoked!!!!" + JsonUtil.beanToJson(requestData));
+        
+        Object obj = dispatcherService.dispatch(requestData);
+//        System.out.println("----------------------");
+//        System.out.println("----------------------" + JsonUtil.beanToJson(obj));
+//        System.out.println("----------------------");
+        return obj;
     }
     
     

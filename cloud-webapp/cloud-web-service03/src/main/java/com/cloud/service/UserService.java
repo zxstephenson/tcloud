@@ -2,8 +2,8 @@ package com.cloud.service;
 
 import org.springframework.stereotype.Component;
 
-import com.cloud.annotation.Api;
-import com.cloud.bean.User;
+import com.cloud.common.annotation.DefineApi;
+import com.cloud.common.bean.User;
 
 /**
  * 〈一句话功能简述〉
@@ -14,9 +14,13 @@ import com.cloud.bean.User;
 @Component("userService")
 public class UserService
 {
-    @Api("getUserInfo")
+    @DefineApi("getUserInfo")
     public String getUserName(User user, int age, String username){
-        
+//        System.err.println("*****************");
+//        System.err.println("user = " + user);
+//        System.err.println("age = " + age);
+//        System.err.println("username = " + username);
+//        System.err.println("*****************");
         return "stephen";
     }
 }

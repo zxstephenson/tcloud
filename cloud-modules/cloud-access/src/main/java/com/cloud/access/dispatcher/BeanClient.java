@@ -10,6 +10,7 @@ import com.cloud.common.bean.RequestData;
 import com.cloud.common.bean.ResponseData;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.utils.AopTargetUtils;
+import com.cloud.common.utils.JsonUtil;
 import com.cloud.common.utils.ReflectionUtil;
 import com.cloud.common.utils.TypeUtil;
 import com.cloud.context.ContextHolder;
@@ -57,24 +58,22 @@ public class BeanClient
         ApiService apiService = getApiService();
         Api api = apiService.getApiByApiCode(apiCode); //根据接口编号获取对应的Api对象
         
-        List<ApiParam> listParams = api.getInputParams();//接口入参列表
-        
-        /**
-         *  获取元素据定义的请求参数类型Class对象列表
-         */
-        Class<?>[] parameterTypes = getParameterTypes(listParams);
-        
         try
         {
             String instanceName = api.getInstanceName();
             String methodName = api.getMethodName();
             Object instance = ContextHolder.getBean(instanceName);
             Object object = AopTargetUtils.getTarget(instance);
+            List<ApiParam> listParams = api.getInputParams();//接口入参列表
             
-            Object[] paramValues = getParameterValues(requestData, methodName, object);
+            //获取元素据中定义的请求参数类型Class对象列表
+            Class<?>[] parametersType = getParameterTypes(listParams);
+            
+            //从requestData中获取参数值
+            Object[] paramValues = getParameterValues(requestData, methodName, object, parametersType);
             
             //调用目标方法
-            Object resultObject = ReflectionUtil.invokeMethod(object, methodName, parameterTypes, paramValues);
+            Object resultObject = ReflectionUtil.invokeMethod(object, methodName, parametersType, paramValues);
             
             if(resultObject != null)
             {
@@ -99,24 +98,32 @@ public class BeanClient
      * @return
      */
     private static Object[] getParameterValues(RequestData requestData,
-            String methodName, Object object)
+            String methodName, Object object, Class<?>[] parametersType)
     {
         //获取接口的参数名
-        List<String> listParameters = ReflectionUtil.getParamterName(object.getClass(), methodName);
-        if(listParameters == null || listParameters.isEmpty())
+        List<String> listParameterName = ReflectionUtil.getParamterName(object.getClass(), methodName);
+        if(listParameterName == null || listParameterName.isEmpty())
         {
             return null;
         }
-        Object[] paramValues = new Object[listParameters.size()]; 
-        if(listParameters != null && !listParameters.isEmpty())
+        Object[] paramValues = new Object[listParameterName.size()]; 
+        if(listParameterName != null && !listParameterName.isEmpty())
         {
             Map<String, Object> requestBody = requestData.getBody();
-            for(int i=0; i<listParameters.size(); i++)
+            for(int i=0; i<listParameterName.size(); i++)
             {
-                Object value = requestBody.get(listParameters.get(i));
-                paramValues[i] = value;
+                Object value = requestBody.get(listParameterName.get(i));
+                Class<?> clazz = parametersType[i];
+                if(!TypeUtil.isJavaClass(clazz))//自定义类型
+                {
+                    paramValues[i] = JsonUtil.jsonToBean(JsonUtil.beanToJson(value), clazz);
+                }else 
+                {
+                    paramValues[i] = value;
+                }
             }
         }
+        
         return paramValues;
     }
 

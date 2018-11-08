@@ -1,27 +1,22 @@
-package com.cloud.bean;
+package com.cloud.common.bean;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 〈一句话功能简述〉
  * 〈功能详细描述〉
  * @author    zhangxin4
- * @version   3.1.0 2018年10月19日
+ * @version   3.1.0 2018年11月8日
  */
 
-public class User
+public class User implements Serializable
 {
-    
+    private static final long serialVersionUID = 5897599571206898291L;
+
     private int id;
     
-    @NotBlank
     private String username;
     
-    @Max(value=100, message="最大的值ssss")
-    @Min(20)
     private int age;
 
     /**
@@ -70,6 +65,13 @@ public class User
     public void setAge(int age)
     {
         this.age = age;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "User [id=" + id + ", username=" + username + ", age=" + age
+                + "]";
     }
     
 }

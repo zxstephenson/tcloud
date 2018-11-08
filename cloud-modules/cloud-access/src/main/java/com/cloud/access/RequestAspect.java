@@ -6,6 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.cloud.common.bean.RequestData;
@@ -22,16 +24,17 @@ import com.cloud.common.utils.ValidateUtil;
 @Component
 public class RequestAspect
 {
-
+    private static final Logger logger = LoggerFactory.getLogger(RequestAspect.class);
+    
     @Pointcut("execution(* com.cloud.service.*.*(..))")
     public void methodPointcut()
     {
     }
     
     @Around("methodPointcut()")
-    public void around(ProceedingJoinPoint jp) throws Throwable
+    public Object around(ProceedingJoinPoint jp) throws Throwable
     {
-        System.err.println("around invoked!!!!");
+        logger.info("around invoked!!!!");
         Object[] objs = jp.getArgs();
         if(objs != null && objs.length>0)
         {
@@ -39,12 +42,15 @@ public class RequestAspect
             if(object instanceof RequestData)
             {
                 RequestData requestData = (RequestData)object;
+                //请求参数校验
                 List<String> validateResults = ValidateUtil.validateObject(requestData);
-                System.out.println("===validateResults ===>" + JsonUtil.beanToJson(validateResults));
+                logger.info("===validateResults ===>" + JsonUtil.beanToJson(validateResults));
+                //如果校验失败将返回校验失败信息
             }
         }
-        System.out.println("====>RequestData = " + JsonUtil.beanToJson(objs));
-        jp.proceed(jp.getArgs()); //调用目标方法
+        logger.info("====>RequestData = " + JsonUtil.beanToJson(objs));
+        Object obj = jp.proceed(jp.getArgs()); //调用目标方法
+        return obj;
     }
     
 }
