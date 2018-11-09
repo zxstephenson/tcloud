@@ -66,12 +66,42 @@
 			</dependency>
 			<dependency>
 				<groupId>com.cloud</groupId>
-	  			<artifactId>cloud-cacheL1</artifactId>
+				<artifactId>cloud-cacheL1-ehcache</artifactId>
 				<version>${cloud.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.cloud</groupId>
-	  			<artifactId>cloud-cacheL2</artifactId>
+				<artifactId>cloud-cacheL2-redis</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-service</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-bus-consumer</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-bus-producer</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-elasticSearch</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-config-client</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-access</artifactId>
 				<version>${cloud.version}</version>
 			</dependency>
 			<dependency>
