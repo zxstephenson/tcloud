@@ -1,6 +1,7 @@
 package com.cloud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.common.access.DispatcherService;
 import com.cloud.common.bean.RequestData;
-import com.cloud.common.utils.JsonUtil;
 
 /**
  * 〈一句话功能简述〉
@@ -23,11 +23,13 @@ public class ServiceController
     @Autowired
     private DispatcherService dispatcherService;
 
+    @Value("${server.port:1111}")
+    private int port;
+    
     @RequestMapping(value="/service", method=RequestMethod.POST)
     public Object service(@RequestBody RequestData requestData){
         
-        System.out.println("serviceController invoked!!!");
-        
+        System.out.println("serviceController invoked!!! port = " + port);
         try
         {
             Thread.sleep(3000);

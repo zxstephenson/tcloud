@@ -10,15 +10,22 @@ ribbon:
   MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 0
   OkToRetryOnAllOperations: true
-#  retryableStatusCodes: 404,403,503
+  retryableStatusCodes: 404,403,503,500
   
 tcloud:
   ribbon:
     connection-timeout: 1000
     read-timeout: 2000
+    retry:
+      max-attempts: 2
+#      retryable-exceptions:
+#        - java.net.SocketTimeoutException
+#        - java.lang.NullPointerException
+#        - org.springframework.cloud.client.loadbalancer.ClientHttpResponseStatusCodeException
   context:
     system-init: 
       - apiInit
+      
 #    api: 
 #      meta-location: data/api.xml
      

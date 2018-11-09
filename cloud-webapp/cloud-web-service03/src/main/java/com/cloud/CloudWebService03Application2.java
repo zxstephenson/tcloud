@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class CloudWebService03Application {
+public class CloudWebService03Application2 {
 
 	public static void main(String[] args) {
-	    args = new String[]{"--server.port=9123"};
-		SpringApplication.run(CloudWebService03Application.class, args);
+	    args = new String[]{"--server.port=9222"};
+		SpringApplication.run(CloudWebService03Application2.class, args);
 	}
 }

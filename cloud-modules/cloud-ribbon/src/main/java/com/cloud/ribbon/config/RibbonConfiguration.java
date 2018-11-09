@@ -1,21 +1,22 @@
 package com.cloud.ribbon.config;
 
-import java.net.SocketTimeoutException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.LoadBalancedRetryFactory;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerRequestFactory;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerRetryProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.retry.RetryPolicy;
-import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.client.DefaultLoadBalancerRetryHandler;
+import com.cloud.ribbon.interceptor.RibbonInterceptor;
 
 /**
  * 〈一句话功能简述〉
@@ -63,9 +64,17 @@ public class RibbonConfiguration
             }
         }
         
-        RestTemplate restTemplate = new RestTemplate(httpRequestFactory);
-//        restTemplate.setErrorHandler(errorHandler);
-        return restTemplate;
+        return new RestTemplate(httpRequestFactory);
     }
+    
+    @Bean
+    public RibbonInterceptor getRibbonInterceptor(
+          LoadBalancerClient loadBalancerClient,
+          LoadBalancerRequestFactory requestFactory,
+          LoadBalancedRetryFactory loadBalancedRetryFactory) {
+     
+       return new RibbonInterceptor(loadBalancerClient, 
+              requestFactory, loadBalancedRetryFactory);
+  }
     
 }
