@@ -42,21 +42,25 @@ spring:
     host: 192.168.8.176
     port: 6379
     
-#  cloud:
-#    stream:
-#      default-binder: kafka
-#      bindings:
-#        broadcastInput: 
-#          destination: broadcastMessage2
-#        groupMessageInput: 
-#          destination: groupMessage
-#          
-#      kafka:
-#        binder:
-#          brokers:
-#            - 192.168.8.91:9092
-#          configuration:
-#            metadata:
-#              fetch:
-#                timeout:
-#                  ms: 2000  
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        broadcastOutput:
+          destination: broadcastMessage2
+        groupMessageOutput:
+          destination: groupMessage
+        broadcastInput: 
+          destination: broadcastMessage2
+        groupMessageInput: 
+          destination: groupMessage
+          
+      kafka:
+        binder:
+          brokers:
+            - 192.168.8.60:9092
+          configuration:
+            metadata:
+              fetch:
+                timeout:
+                  ms: 2000  

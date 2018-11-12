@@ -67,6 +67,14 @@
 			<groupId>com.cloud</groupId>
 			<artifactId>cloud-ribbon</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>cloud-bus-producer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>cloud-bus-consumer</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<build>

@@ -12,7 +12,7 @@ import com.cloud.common.bus.listeners.AbstractMessageListener;
  * @version   3.1.0 2018年9月25日
  */
 @Component
-public class MessageListener extends AbstractMessageListener
+public class MsgListener extends AbstractMessageListener
 {
 
     @Override
