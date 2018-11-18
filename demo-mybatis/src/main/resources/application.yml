@@ -1,0 +1,31 @@
+server:
+  port: 8001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+            
+
+spring:
+  application: 
+    name: demo-mybatis
+  thymeleaf: 
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/views/
+      
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/test3?useSSL=false&characterEncoding=UTF-8
+    driverClassName: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations:
+    - com/software/mapper/*.xml
+  type-aliases-package: com.software.bean
+  
+  
+logging:
+  level:
+    root: info

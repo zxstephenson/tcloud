@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.software.mapper.RoleResourceMapper">
+
+	<!-- <resultMap type="com.software.domain.RoleResourceInfo" id="roleResourceMap">
+		
+	</resultMap> -->
+
+	<select id="queryRoleNameByResourceId" parameterType="String" resultType="String">
+		SELECT r.rolename FROM role_resource rr JOIN role r ON rr.roleid=r.id
+			WHERE rr.resourceid=#{resourceId}
+	</select>
+	
+</mapper>

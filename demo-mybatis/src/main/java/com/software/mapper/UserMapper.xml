@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.software.mapper.UserMapper">
+
+	<!-- 根据用户名和密码查询用户信息 -->
+	<select id="findUserByUsername" parameterType="java.lang.String" resultMap="userInfoMap">
+		SELECT t.id, t.username, t.password
+			FROM USER t 
+		WHERE t.USERNAME=#{username} 
+	</select>
+	
+	<resultMap type="com.software.domain.UserInfo" id="userInfoMap">
+		<id property="userId" column="id"/>
+		<result property="username" column="username" javaType="String"/>
+		<result property="password" column="password" javaType="String"/>
+		<!-- <association property="roles" column="id" select="getUserRole"/> -->
+		<collection property="roles" ofType="com.software.bean.Role"
+			select="getUserRole" column="id">
+		</collection>
+	</resultMap>
+	
+	<select id="getUserRole" parameterType="String" resultType="com.software.bean.Role">
+		select r.id, r.rolename, r.roledesc from role r join user_role ur 
+			on r.id=ur.roleId where ur.userId=#{userId}
+	</select>
+
+	<select id="findAllUser" resultType="com.software.bean.User">
+		SELECT t.id, t.username, t.password FROM USER t 
+	</select>
+
+	<!-- 新增用户 -->
+	<insert id="addUserInfo" parameterType="com.software.bean.User">
+		INSERT INTO USER(ID, USERNAME, PASSWORD, CREATED_BY, CREATED_DATE,
+		 UPDATED_BY, UPDATED_DATE)
+			VALUES(#{id}, #{username}, #{password}, #{createdBy}, now(), 
+			#{updatedBy}, now())
+		
+	</insert>
+
+	<!-- 修改用户信息 -->
+	<!-- <update id="updateUserInfo" parameterType="com.study.pojo.TbUser">
+		UPDATE TB_USER SET username=#{username}, password=#{password}, phone=#{phone}, email=#{email}
+			WHERE ID=#{id}
+	</update> -->
+	
+	<!-- 删除用户 -->
+	<!-- <delete id="removeUserInfo" parameterType="int">
+		DELETE FROM TB_USER WHERE ID=#{ID} 
+	</delete> -->
+	
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.software.mapper.ResourceMapper">
+
+	<resultMap type="com.software.bean.Resource" id="resourceMap">
+		<id property="id" column="id"/>
+		<result property="resourceUrl" column="resource_url"/>
+	</resultMap>
+
+	<select id="queryAllResource" resultMap="resourceMap">
+		select id, resource_url from resource
+	</select>
+	
+	
+	
+</mapper>
