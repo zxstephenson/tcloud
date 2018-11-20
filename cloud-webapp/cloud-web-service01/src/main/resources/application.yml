@@ -37,11 +37,15 @@ tcloud:
 spring:
   application:
     name: cloud-service01
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
     
+  
   redis:
     host: 192.168.8.176
     port: 6379
-    
   cloud:
     stream:
       default-binder: kafka

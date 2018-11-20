@@ -22,3 +22,9 @@ tcloud:
     api:
       base-package-path:
         - com.cloud.service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

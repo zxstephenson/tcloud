@@ -2,6 +2,8 @@ package com.cloud.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * 
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version   0.0.1 2018年8月20日
  */
 @SpringBootApplication
+@EnableDiscoveryClient
+@EnableZuulProxy
 public class GatewayApplication 
 {
     public static void main(String[] args) {

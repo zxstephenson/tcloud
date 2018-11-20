@@ -1,0 +1,31 @@
+server:
+  port: 8401
+  
+spring:
+  application:
+    name: gateway  
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000 
+  
+  
+zuul:
+  routes:
+    upload:
+      path: /upload/**
+      service-id: cloud-service01
