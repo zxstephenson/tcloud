@@ -1,0 +1,18 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/     
+spring:
+  cloud:
+    config:
+      enabled: true
+      label: cloud-web-service03
+      discovery:
+        enabled: true
+        service-id: cloud-config-server
+#    stream:
+#      default-binder: kafka
+#      kafka:
+#        binder:
+#          brokers:
+#            - 192.168.8.60:9092

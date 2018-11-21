@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class CloudWebService03Application {
 
 	public static void main(String[] args) {
-	    args = new String[]{"--server.port=9123"};
+	    /*args = new String[]{"--server.port=9002"};*/
 		SpringApplication.run(CloudWebService03Application.class, args);
 	}
 }

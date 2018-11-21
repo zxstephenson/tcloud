@@ -16,7 +16,7 @@ spring:
       kafka:
         binder:
           brokers:
-            - 192.168.8.91:9092
+            - 192.168.8.60:9092
      
 #management:
 #  endpoints:

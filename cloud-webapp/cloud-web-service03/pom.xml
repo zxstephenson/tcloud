@@ -50,5 +50,9 @@
 			<groupId>com.cloud</groupId>
 			<artifactId>cloud-service</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>cloud-config-client</artifactId>
+		</dependency>
 	</dependencies>
 </project>
