@@ -3,9 +3,7 @@ package com.cloud.config.client.locator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +20,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.CompositePropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertySource;
-import org.springframework.util.ClassUtils;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
 
 import com.cloud.common.utils.JsonUtil;
@@ -130,35 +128,21 @@ public class NativePropertySourceLocator implements PropertySourceLocator
     private boolean copyStringToFile(String str, String outputFileName)
     {
         
-        OutputStream os = null;
         boolean copyIsSuccess = true;
         try
         {
-            File file = new File(outputFileName);
+            File outptuFile = new File(outputFileName);
             
-            if(file.exists())
+            if(outptuFile.exists())
             {
-                file.delete();
+                outptuFile.delete();
             }
-            
-            os = new FileOutputStream(file);
-            StreamUtils.copy(str, Charset.forName("UTF-8"), os);
+            //将str的内容写如到outputFile对应的文件中
+            FileCopyUtils.copy(str.getBytes(), outptuFile);
         } catch (IOException e)
         {
             copyIsSuccess = false;
             e.printStackTrace();
-        } finally
-        {
-            if (null != os)
-            {
-                try
-                {
-                    os.close();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
         }
         return copyIsSuccess;
     }
