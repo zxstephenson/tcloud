@@ -55,21 +55,18 @@ public class NativePropertySourceLocator implements PropertySourceLocator
             if(locator instanceof ConfigServicePropertySourceLocator)
             {
                 backUpIsSuccess = backUpRemoteActivePropertiesFile(environment, locator);
-            }else if(locator instanceof NativePropertySourceLocator)
-            {
-                //如果这里将远程配置文件备份成功，则表示成功从configServer获取到了配置文件，因此直接返回。否则加载本地配置文件
-                if(backUpIsSuccess)
-                {
-                    return null;
-                }else
-                {
-                    //加载本地配置文件
-                    return loadNativePropertyFile(environment);  
-                }
             }
         }
+        //如果这里将远程配置文件备份成功，则表示成功从configServer获取到了配置文件，因此直接返回。否则加载本地配置文件
+        if(backUpIsSuccess)
+        {
+            return null;
+        }else
+        {
+            //加载本地配置文件
+            return loadNativePropertyFile(environment);  
+        }
         
-        return null;
     }
 
     private String getBackUpFileName()
@@ -108,7 +105,7 @@ public class NativePropertySourceLocator implements PropertySourceLocator
             String[] properties = source.getPropertyNames();
             for (String propertyName : properties)
             {
-                String value = (String) source.getProperty(propertyName);
+                String value = String.valueOf(source.getProperty(propertyName));
                 propertiesBuilder.append(propertyName + "=" + value + "\r\n");
             }
 
@@ -177,9 +174,8 @@ public class NativePropertySourceLocator implements PropertySourceLocator
         String outputFileName = getBackUpFileName();
         //定义一个map来存储从本地文件读取的配置信息
         Map<String,String> properties = new HashMap<>();
-        String path = ClassUtils.getDefaultClassLoader().getResource(outputFileName).getPath();
         
-        File file = new File(path);
+        File file = new File(outputFileName);
         //如果本地文件不存在，则直接返回null
         if(!file.exists())
         {

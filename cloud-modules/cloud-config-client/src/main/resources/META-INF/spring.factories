@@ -1,2 +1,2 @@
 org.springframework.cloud.bootstrap.BootstrapConfiguration=\
-com.cloud.config.client.listener.WebConfig
+com.cloud.config.client.listener.ConfigClientConfig
