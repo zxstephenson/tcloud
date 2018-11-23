@@ -32,6 +32,7 @@
     <module>cloud-context</module>
     <module>cloud-access</module>
     <module>cloud-security</module>
+    <module>cloud-shiro</module>
   </modules>
   
 </project>

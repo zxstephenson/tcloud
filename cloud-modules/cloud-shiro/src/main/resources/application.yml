@@ -1,0 +1,27 @@
+server:
+  port: 9400
+
+spring:
+  application:
+    name: cloud-shiro-test
+  thymeleaf: 
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/views/
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/testShiro001?useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: admin
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    show-sql: true
+
+mybatis:
+  mapper-locations:
+    - com/software/mapper/*.xml
+  type-aliases-package: com.cloud.shiro.domain
+  
+  
+logging:
+  level:
+    root: info

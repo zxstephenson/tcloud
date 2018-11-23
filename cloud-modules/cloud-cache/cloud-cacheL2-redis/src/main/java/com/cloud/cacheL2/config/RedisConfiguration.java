@@ -40,7 +40,7 @@ public class RedisConfiguration
         };
     }
     
-    /*@Bean
+ /*   @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
@@ -53,10 +53,11 @@ public class RedisConfiguration
         return template;
     }*/
     
-    public RedisTemplate<Object, Object> redisTemplate2(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
+    @Bean(name="restTemplate")
+    public RedisTemplate<byte[], byte[]> redisTemplate2(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<byte[], byte[]> template = new RedisTemplate<byte[], byte[]>();
         template.setConnectionFactory(connectionFactory);
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+        Jackson2JsonRedisSerializer<byte[]> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<byte[]>(byte[].class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
@@ -67,7 +68,7 @@ public class RedisConfiguration
         return template;
     }
     
-    @Bean
+    @Bean(name="stringRedisTemplate")
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
         stringRedisTemplate.setConnectionFactory(factory);

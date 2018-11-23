@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cloud.shiro.mapper.RoleMapper">
+
+
+	<resultMap type="Role" id="userRoleInfoResultMap">
+		<id property="id" column="id"/>
+		<result property="roleName" column="rolename"/>
+		<collection property="permissions" column="id" ofType="Permission" 
+		select="com.cloud.shiro.mapper.PermissionMapper.queryPermissionByRoleId"/>
+	</resultMap>
+
+	<select id="queryRolesByUserId" parameterType="String" resultMap="userRoleInfoResultMap">
+		 SELECT R.ID, R.ROLENAME FROM USERROLE UR 
+		 	JOIN 
+		 	ROLE R ON UR.ROLEID=R.ID 
+		 	WHERE USERID=#{userId}
+	</select>	
+	
+	<insert id="addRole"></insert>
+	
+</mapper>

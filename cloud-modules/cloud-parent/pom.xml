@@ -21,6 +21,8 @@
 	  <cloud.version>1.0.0-SNAPSHOT</cloud.version>
 	  <jedis.version>2.9.0</jedis.version>
 	  <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+	  <shiro.version>1.4.0</shiro.version>
+	  <druid.version>1.1.12</druid.version>
 	</properties>
 
 
@@ -109,6 +111,21 @@
 	      		<artifactId>jedis</artifactId>
 	      		<version>${jedis.version}</version>
 	      	</dependency>
+	      	<dependency>
+			    <groupId>org.apache.shiro</groupId>
+			    <artifactId>shiro-core</artifactId>
+			    <version>${shiro.version}</version>
+			</dependency>
+	      	<dependency>
+			    <groupId>org.apache.shiro</groupId>
+			    <artifactId>shiro-spring</artifactId>
+			    <version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>druid</artifactId>
+			    <version>${druid.version}</version>
+			</dependency>
 		</dependencies>
 			
 	</dependencyManagement>

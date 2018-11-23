@@ -3,6 +3,7 @@ package com.cloud.common.cache.cacheL2;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 〈一句话功能简述〉
@@ -12,29 +13,53 @@ import java.util.Map;
  */
 public interface CacheL2Dao
 {
-    public void set(final String key,final Object value);
+    default void set(final String key,final Object value){};
     
-    public void setex(final String key, final int seconds, final Object value);
+    default void set(final byte[] key,final byte[] value){};
     
-    public void mset(final Map<? extends Object, ? extends Object> map);
+    default void setex(final String key, final Object value, final int seconds){};
     
-    public List<Object> mget(final Collection<Object> keys);
+    default void setex(final byte[] key, final byte[] value, final int seconds){};
     
-    public Object get(final String key);
+    default Set<byte[]> keys(final byte[] keyPrefix){
+        return null;
+    }
     
-    public Boolean delete(final Object key);
+    default void mset(final Map<? extends Object, ? extends Object> map){};
     
-    public Long multiDelete(final Collection<Object> keys);
+    default List<Object> mget(final Collection<Object> keys){
+        return null;
+    };
     
-    public Boolean expire(final String key, final int seconds);
+    default Object get(final String key){
+        return null;
+    };
     
-    public void hset(final Object key, final Object field, final Object value);
+    default byte[] get(final byte[] key){
+        return null;
+    };
     
-    public void mhSet(Object key, Map<? extends Object, ? extends Object> map);
+    default Boolean del(final byte[] key){
+        return null;
+    };
     
-    public Object hget(final Object key, final Object field);
+    default Long multiDel(final Collection<byte[]> keys){
+        return null;
+    };
     
-    public void mhGet(Object key, Collection<Object> hashFields);
+    default Boolean expire(final String key, final int seconds){
+        return null;
+    };
     
-    public void hdelete(final Object key, final Object... hashFields);
+    default void hset(final Object key, final Object field, final Object value){};
+    
+    default void mhSet(Object key, Map<? extends Object, ? extends Object> map){};
+    
+    default Object hget(final Object key, final Object field){
+        return null;
+    };
+    
+    default void mhGet(Object key, Collection<Object> hashFields){};
+    
+    default void hdelete(final Object key, final Object... hashFields){};
 }
