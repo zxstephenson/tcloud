@@ -19,6 +19,10 @@ public interface Constants
     
     public static final String SERVICE_API = "api:";
     
+    //指定散列算法为md5
+    public static final String ALGORITHM_NAME = "MD5";
     
-    
+    //散列迭代次数
+    public static final int HASH_ITERATIONS = 2; 
+  
 }

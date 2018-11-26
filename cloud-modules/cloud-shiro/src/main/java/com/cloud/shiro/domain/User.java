@@ -16,6 +16,8 @@ public class User {
     
     private String password;
     
+    private String credentialSalt;
+    
     private List<Role> roles;
 
     /**
@@ -81,8 +83,16 @@ public class User {
     {
         this.username = username;
     }
+    
+    public String getCredentialSalt() {
+		return credentialSalt;
+	}
 
-    @Override
+	public void setCredentialSalt(String credentialSalt) {
+		this.credentialSalt = credentialSalt;
+	}
+
+	@Override
     public String toString()
     {
         return "User [id=" + id + ", username=" + username + ", password="

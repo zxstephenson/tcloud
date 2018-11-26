@@ -1,5 +1,6 @@
 package com.cloud.shiro.reaml;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -7,7 +8,10 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cloud.common.utils.JsonUtil;
@@ -60,6 +64,7 @@ public class MyShiroRealm extends AuthorizingRealm{
       //获取用户信息
       String name = authenticationToken.getPrincipal().toString();
       User user = loginService.findByName(name);
+//      this.setSession("currentUser",authenticationToken.getPrincipal().toString());
       if (user == null) {
           //这里返回后会报出对应异常
           return null;
@@ -68,8 +73,28 @@ public class MyShiroRealm extends AuthorizingRealm{
           System.err.println("******************** user = " + user.toString());
           System.err.println("********************");
           //这里验证authenticationToken和simpleAuthenticationInfo的信息
-          SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, user.getPassword().toString(), getName());
+          SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, 
+        		  user.getPassword().toString(), ByteSource.Util.bytes(user.getCredentialSalt()), getName());
+          
+          //ByteSource.Util.bytes(user.getCredentialsSalt())加盐
+//          SimpleAuthenticationInfo simpleAuthenticationInfo = 
+//        		  new SimpleAuthenticationInfo(name, user.getPassword(), ByteSource.Util.bytes(user.getCredentialsSalt()), getName());
           return simpleAuthenticationInfo;
       }
   }
+  
+  /**
+   * 将一些数据放到ShiroSession中,以便于其它地方使用
+   *   比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到
+   */
+  private void setSession(Object key,Object value){
+      Subject subject = SecurityUtils.getSubject();
+      if (null != subject) {
+          Session session = subject.getSession();
+          if (null != session) {
+              session.setAttribute(key,value);
+          }
+      }
+  }
+  
 }

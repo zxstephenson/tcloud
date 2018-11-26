@@ -9,16 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="id" property="id"/>
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
+		<result property="credentialSalt" column="credentialsalt"/>
 		<collection property="roles" column="id" select="com.cloud.shiro.mapper.RoleMapper.queryRolesByUserId" ofType="Role"/>
 	</resultMap>
 
 	<select id="findByName" parameterType="string" resultMap="userInfoMap">
-		select id, username, password from user
-			where username=#{username}
+		SELECT ID, USERNAME, PASSWORD, CREDENTIALSALT FROM USER
+			WHERE USERNAME=#{username}
 	</select>
 	
 	
 	<select id="findById"></select>
 	
-	<insert id="addUser"></insert>
+	<insert id="addUser" parameterType="User">
+		INSERT INTO USER(ID, USERNAME, PASSWORD, CREDENTIALSALT) 
+			VALUES(#{id}, #{username}, #{password}, #{credentialSalt});
+	</insert>
 </mapper>

@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cloud.common.utils.UUIDUtil;
 import com.cloud.shiro.domain.Permission;
 import com.cloud.shiro.domain.Role;
 import com.cloud.shiro.domain.User;
 import com.cloud.shiro.mapper.RoleMapper;
 import com.cloud.shiro.mapper.UserMapper;
 import com.cloud.shiro.service.LoginService;
+import com.cloud.shiro.utils.PasswordUtil;
 
 /**
  * 〈一句话功能简述〉
@@ -32,7 +34,13 @@ public class LoginServiceImpl implements LoginService {
     //添加用户
     @Override
     public User addUser(User user) {
-        userMapper.addUser(user);
+    	user.setId(UUIDUtil.getUUID());
+    	String credentialSalt = UUIDUtil.getUUID();
+    	user.setCredentialSalt(credentialSalt);
+    	user.setPassword(PasswordUtil.getEncryptPasswordHex(user.getPassword(), credentialSalt));
+    	userMapper.addUser(user);
+    	System.out.println("====>user = " + user);
+    	System.out.println("=====>credentialSalt = " + credentialSalt);
         return user;
     }
 

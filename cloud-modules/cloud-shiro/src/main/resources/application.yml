@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: cloud-shiro-test
+  mvc:
+    view:
+      prefix: 
+    
   thymeleaf: 
     mode: LEGACYHTML5
     prefix: classpath:/templates/views/
@@ -11,8 +15,19 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/testShiro001?useSSL=false&characterEncoding=UTF-8
     username: root
-    password: admin
+    password: admin123
     type: com.alibaba.druid.pool.DruidDataSource
+  
+  redis:
+    host: 192.168.44.129
+    port: 6379
+    jedis:
+      pool:
+        max-active: 10
+        min-idle: 0
+        max-idle: 10
+        max-wait: -1
+          
   jpa:
     show-sql: true
 

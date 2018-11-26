@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cloud.shiro.domain.Role;
 import com.cloud.shiro.domain.User;
@@ -42,7 +43,10 @@ public class LoginController
                 map.get("password").toString());*/
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
                 user.getUsername(), user.getPassword());
-        //进行验证，这里可以捕获异常，然后返回对应信息
+        System.out.println("#################");
+        System.out.println("#################user = " + user);
+        System.out.println("#################");
+//        //进行验证，这里可以捕获异常，然后返回对应信息
         subject.login(usernamePasswordToken);
         return "index";
     }
@@ -66,10 +70,11 @@ public class LoginController
 
     //数据初始化
     @RequiresPermissions("user:add")
-    @RequestMapping(value = "/addUser")
+    @RequestMapping(value = "/addUser", method=RequestMethod.POST)
+    @ResponseBody
     public String addUser(User user){
         loginService.addUser(user);
-        return "addUser is ok! \n" + user;
+        return "success";
     }
 
     //角色初始化

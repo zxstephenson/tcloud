@@ -6,22 +6,101 @@
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
 <script type="text/javascript" src="/webjars/jquery/1.11.1/jquery.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+<script type="text/javascript" src="/webjars/vue/dist/vue.js"></script>
 </head>
 <body>
 	
-	<div class="contrainer">
-		<div class="row">
+	<div class="contrainer" id="mainApp">
+		<div class="row" style="margin:20px;">
 			<div>
-				<button type="button" class="btn btn-primary">新增用户</button>
-				<button type="button" class="btn btn-primary">修改用户密码</button>
-				<button type="button" class="btn btn-primary">删除用户</button>
-				<button type="button" class="btn btn-primary">用户列表</button>
+				<button type="button" v-on:click="showDiv('addUserDiv')" class="btn btn-primary" id="addUser">新增用户</button>
+				<button type="button" v-on:click="showDiv('updatePasswordDiv')" class="btn btn-primary" id="updatePassword">修改用户密码</button>
+				<button type="button" v-on:click="showDiv('deleteUserDiv')" class="btn btn-primary" id="deleteUser">删除用户</button>
+				<button type="button" v-on:click="showDiv('listUsersDiv')" class="btn btn-primary" id="listUsers">用户列表</button>
 			</div>
 		</div>
-	
+		<div class="row" style="margin-top:30px;">
+			<div id="addUserDiv" class="col-md-6" v-show="showDivId=='addUserDiv'">
+				<form action="" method="POST" id="addUserForm">
+					<div class="form-group">
+						<label>用户名：</label>
+						<div>
+							<input type="text" name="username" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label>密码：</label>
+						<div>
+							<input type="password" name="password" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<input type="button" v-on:click="addUser()" value="提交" class="form-control btn btn-primary">
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div id="updatePasswordDiv" class="col-md-6" v-show="showDivId=='updatePasswordDiv'">
+				updatePasswordDiv
+			</div>
+			
+			<div id="deleteUserDiv" class="col-md-6" v-show="showDivId=='deleteUserDiv'">
+				deleteUserDiv
+			</div>
+			
+			<div id="listUsersDiv" class="col-md-6" v-show="showDivId=='listUsersDiv'">
+				listUsersDiv
+			</div>
+		
+		</div>
 	</div>
 
-
-
 </body>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		var vm = new Vue({
+			el: '#mainApp',
+			data: {
+				showDivId:'addUserDiv'	
+			},
+			methods:{
+				showDiv: function(divId){
+					this.showDivId = divId;
+				},
+				addUser: function(){
+					alert("aaaa");
+					$.ajax({
+						url: '/addUser',
+						type: 'POST',
+						data: $("#addUserForm").serialize(),
+						success: function(data){
+							if(data == 'success'){
+								alert("success");
+							}
+						}
+					})
+				},
+				updatePassword: function(){
+					
+				},
+				deleteUser: function(){
+					
+				},
+				listUsers: function(){
+					
+				}
+			}
+			
+		})
+		
+	});
+
+
+</script>
+
 </html>
