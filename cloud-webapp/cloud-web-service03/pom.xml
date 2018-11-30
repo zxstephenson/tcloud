@@ -54,5 +54,10 @@
 			<groupId>com.cloud</groupId>
 			<artifactId>cloud-config-client</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.yiqiniu.easytrans</groupId>
+		    <artifactId>easytrans-starter</artifactId>
+		    <version>1.1.2</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -18,7 +18,25 @@ public class User {
     
     private String credentialSalt;
     
+    private String locked;
+    
     private List<Role> roles;
+
+    /**
+     * @return the locked
+     */
+    public String getLocked()
+    {
+        return locked;
+    }
+
+    /**
+     * @param locked the locked to set
+     */
+    public void setLocked(String locked)
+    {
+        this.locked = locked;
+    }
 
     /**
      * @return the id

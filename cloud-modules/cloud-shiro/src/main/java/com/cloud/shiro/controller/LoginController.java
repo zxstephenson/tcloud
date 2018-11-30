@@ -2,6 +2,8 @@ package com.cloud.shiro.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
@@ -38,6 +40,7 @@ public class LoginController
     public String login(User user){
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
+//        subject.isPermitted("user:add");
        /* UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
                 map.get("username").toString(),
                 map.get("password").toString());*/
@@ -51,6 +54,7 @@ public class LoginController
         return "index";
     }
 
+    @RequiresAuthentication
     @RequestMapping(value = "/index")
     public String index(){
         return "index";
@@ -69,7 +73,7 @@ public class LoginController
     }
 
     //数据初始化
-    @RequiresPermissions("user:add")
+//    @RequiresPermissions("user:add")
     @RequestMapping(value = "/addUser", method=RequestMethod.POST)
     @ResponseBody
     public String addUser(User user){

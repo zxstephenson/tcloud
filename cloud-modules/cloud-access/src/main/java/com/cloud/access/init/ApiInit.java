@@ -18,7 +18,7 @@ import com.cloud.common.bean.Api;
 import com.cloud.common.bean.ApiParam;
 import com.cloud.common.bean.ApiType;
 import com.cloud.common.bean.ServiceInstanceInfo;
-import com.cloud.common.cache.cacheL2.CacheL2Dao;
+import com.cloud.common.cache.cacheL2.CacheL2DAO;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.context.SystemStarted;
 import com.cloud.common.utils.AopTargetUtils;
@@ -47,7 +47,7 @@ public class ApiInit implements SystemStarted
     private ServiceInstanceInfo serviceInstanceInfo;
     
     @Autowired
-    private CacheL2Dao cacheL2Client;
+    private CacheL2DAO cacheL2Client;
     
     @Override
     public void run()

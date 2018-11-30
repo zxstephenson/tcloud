@@ -16,10 +16,31 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("tcloud.context")
 public class ContextProperties
 {
+    /**
+     * session超时时间，默认30分钟, 单位毫秒
+     */
+    private long sessionTimeout = 30 * 60 * 1000;
+    
     private Api api = new Api();
     
     private List<String> systemInit = new ArrayList<>();
     
+    /**
+     * @return the sessionTimeout
+     */
+    public long getSessionTimeout()
+    {
+        return sessionTimeout;
+    }
+
+    /**
+     * @param sessionTimeout the sessionTimeout to set
+     */
+    public void setSessionTimeout(long sessionTimeout)
+    {
+        this.sessionTimeout = sessionTimeout;
+    }
+
     /**
      * @return the api
      */

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.cloud.common.bean.Api;
 import com.cloud.common.bean.ServiceInstanceInfo;
-import com.cloud.common.cache.cacheL2.CacheL2Dao;
+import com.cloud.common.cache.cacheL2.CacheL2DAO;
 import com.cloud.common.constant.Constants;
 
 /**
@@ -20,7 +20,7 @@ import com.cloud.common.constant.Constants;
 public class ApiService
 {
     @Autowired
-    private CacheL2Dao cacheL2Client;
+    private CacheL2DAO cacheL2Client;
     
     @Autowired
     private ServiceInstanceInfo serviceInstanceInfo;

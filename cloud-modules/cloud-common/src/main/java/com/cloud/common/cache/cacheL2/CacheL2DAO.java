@@ -11,17 +11,17 @@ import java.util.Set;
  * @author    zhangxin4
  * @version   3.1.0 2018年9月19日
  */
-public interface CacheL2Dao
+public interface CacheL2DAO
 {
     default void set(final String key,final Object value){};
     
-    default void set(final byte[] key,final byte[] value){};
+    default void set(final String key,final byte[] value){};
     
     default void setex(final String key, final Object value, final int seconds){};
     
-    default void setex(final byte[] key, final byte[] value, final int seconds){};
+    default void setex(final String key, final byte[] value, final int seconds){};
     
-    default Set<byte[]> keys(final byte[] keyPrefix){
+    default Set<String> keys(final String keyPrefix){
         return null;
     }
     
@@ -35,15 +35,15 @@ public interface CacheL2Dao
         return null;
     };
     
-    default byte[] get(final byte[] key){
+    default byte[] getByteValue(final String key){
         return null;
     };
     
-    default Boolean del(final byte[] key){
+    default Boolean del(final String key){
         return null;
     };
     
-    default Long multiDel(final Collection<byte[]> keys){
+    default Long multiDel(final Collection<String> keys){
         return null;
     };
     

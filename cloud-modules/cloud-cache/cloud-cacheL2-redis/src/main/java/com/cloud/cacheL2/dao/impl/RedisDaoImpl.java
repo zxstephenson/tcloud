@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
-import com.cloud.common.cache.cacheL2.CacheL2Dao;
+import com.cloud.common.cache.cacheL2.CacheL2DAO;
 
 /**
  * 〈一句话功能简述〉
@@ -24,13 +24,13 @@ import com.cloud.common.cache.cacheL2.CacheL2Dao;
  * @version   3.1.0 2018年9月19日
  */
 @Repository
-public class RedisDaoImpl implements CacheL2Dao
+public class RedisDaoImpl implements CacheL2DAO
 {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     
     @Autowired
-    private RedisTemplate<byte[], byte[]> redisTemplate;
+    private RedisTemplate<String, byte[]> redisTemplate;
     
     @Resource(name="stringRedisTemplate")
     private ValueOperations<Object, Object> stringValOps;
@@ -39,7 +39,7 @@ public class RedisDaoImpl implements CacheL2Dao
     private HashOperations<Object, Object, Object> stringHashOps;
     
     @Resource(name="redisTemplate")
-    private ValueOperations<byte[], byte[]> byteValueOps;
+    private ValueOperations<String, byte[]> byteValueOps;
     
     
     @Override
@@ -53,13 +53,13 @@ public class RedisDaoImpl implements CacheL2Dao
     }
 
     @Override
-    public void setex(byte[] key, byte[] value, int seconds)
+    public void setex(String key, byte[] value, int seconds)
     {
         byteValueOps.set(key, value, seconds, TimeUnit.SECONDS);
     }
     
     @Override
-    public Set<byte[]> keys(byte[] keyPrefix)
+    public Set<String> keys(String keyPrefix)
     {
         return redisTemplate.keys(keyPrefix);
     }
@@ -80,18 +80,17 @@ public class RedisDaoImpl implements CacheL2Dao
     }
     
     @Override
-    public byte[] get(byte[] key)
-    {
+    public byte[] getByteValue(final String key){
         return byteValueOps.get(key);
     }
     
     @Override
-    public Boolean del(final byte[] key){
+    public Boolean del(final String key){
         return redisTemplate.delete(key);
     }
     
     @Override
-    public Long multiDel(final Collection<byte[]> keys){
+    public Long multiDel(final Collection<String> keys){
         return redisTemplate.delete(keys);
     }
 

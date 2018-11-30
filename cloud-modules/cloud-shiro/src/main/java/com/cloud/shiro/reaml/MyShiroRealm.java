@@ -4,7 +4,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -14,7 +16,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cloud.common.utils.JsonUtil;
 import com.cloud.shiro.domain.Permission;
 import com.cloud.shiro.domain.Role;
 import com.cloud.shiro.domain.User;
@@ -43,12 +44,14 @@ public class MyShiroRealm extends AuthorizingRealm{
       User user = loginService.findByName(name);
       //添加角色和权限
       SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-      for (Role role:user.getRoles()) {
+      for (Role role : user.getRoles()) {
           //添加角色
           simpleAuthorizationInfo.addRole(role.getRoleName());
-          for (Permission permission:role.getPermissions()) {
+          System.out.println("==============>roleName = " + role.getRoleName());
+          for (Permission permission : role.getPermissions()) {
               //添加权限
               simpleAuthorizationInfo.addStringPermission(permission.getPermission());
+              System.out.println("==============>Permission = " + permission.getPermission());
           }
       }
       return simpleAuthorizationInfo;
@@ -62,23 +65,26 @@ public class MyShiroRealm extends AuthorizingRealm{
           return null;
       }
       //获取用户信息
-      String name = authenticationToken.getPrincipal().toString();
-      User user = loginService.findByName(name);
+      String username = authenticationToken.getPrincipal().toString();
+      User user = loginService.findByName(username);
 //      this.setSession("currentUser",authenticationToken.getPrincipal().toString());
       if (user == null) {
+          
           //这里返回后会报出对应异常
-          return null;
-      } else {
+          throw new UnknownAccountException();//没有找到账号
+          
+      } else if(Boolean.TRUE.equals(user.getLocked())){
+          
+          throw new LockedAccountException(); //帐号锁定
+          
+      }else {
           System.err.println("********************");
           System.err.println("******************** user = " + user.toString());
           System.err.println("********************");
           //这里验证authenticationToken和simpleAuthenticationInfo的信息
-          SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, 
-        		  user.getPassword().toString(), ByteSource.Util.bytes(user.getCredentialSalt()), getName());
+          SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, 
+        		  user.getPassword(), ByteSource.Util.bytes(user.getCredentialSalt()), getName());
           
-          //ByteSource.Util.bytes(user.getCredentialsSalt())加盐
-//          SimpleAuthenticationInfo simpleAuthenticationInfo = 
-//        		  new SimpleAuthenticationInfo(name, user.getPassword(), ByteSource.Util.bytes(user.getCredentialsSalt()), getName());
           return simpleAuthenticationInfo;
       }
   }
