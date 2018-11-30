@@ -9,6 +9,8 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
+import io.jmnarloch.spring.cloud.ribbon.support.RibbonFilterContextHolder;
+
 /**
  * 〈一句话功能简述〉
  * 〈功能详细描述〉
@@ -23,12 +25,13 @@ public class GrayscaleReleaseFilter extends ZuulFilter
     public Object run() throws ZuulException
     {
 
-        RequestContext requestContext = RequestContext.getCurrentContext();
-        HttpServletRequest request = requestContext.getRequest();
-        String lanch = request.getParameter("lanch");
-        if(StringUtil.isNotEmpty(lanch))
-        {
-        }
+//        RequestContext requestContext = RequestContext.getCurrentContext();
+//        HttpServletRequest request = requestContext.getRequest();
+//        String lanch = request.getParameter("lanch");
+//        if(StringUtil.isNotEmpty(lanch))
+//        {
+//            RibbonFilterContextHolder.getCurrentContext().add("lancher", "1");
+//        }
         return null;
     }
 

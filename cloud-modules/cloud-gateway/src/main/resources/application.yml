@@ -25,6 +25,9 @@ ribbon:
   
   
 zuul:
+  ignored-services: web-service,web-service02
+  prefix: /service
+  strip-prefix: false    
   routes:
     upload:
       path: /upload/**
