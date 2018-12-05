@@ -20,13 +20,13 @@
   
 	<dependencies>
 
-		<dependency>
+<!-- 		<dependency>
 		  <groupId>io.jmnarloch</groupId>
 		  <artifactId>ribbon-discovery-filter-spring-cloud-starter</artifactId>
 		  <version>2.1.0</version>
 		</dependency>
 
-		<dependency>
+ -->		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -53,6 +53,10 @@
 			<artifactId>
 				spring-cloud-starter-netflix-eureka-client
 			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cloud</groupId>
+			<artifactId>cloud-context</artifactId>
 		</dependency>
 	</dependencies>
 </project>

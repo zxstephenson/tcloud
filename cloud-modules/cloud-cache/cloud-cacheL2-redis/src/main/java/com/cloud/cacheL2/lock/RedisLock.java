@@ -1,16 +1,18 @@
-package com.lock;
+package com.cloud.cacheL2.lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.controller.ContextHolder;
+import com.cloud.context.ContextHolder;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 /**
- * Redis distributed lock implementation.
- *
- * @author zhengcanrui
+ * 
+ * 〈一句话功能简述〉
+ * 〈功能详细描述〉
+ * @author    zhangxin4
+ * @version   3.1.0 2018年12月5日
  */
 public class RedisLock {
 
