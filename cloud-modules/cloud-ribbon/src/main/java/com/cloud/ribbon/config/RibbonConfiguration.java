@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.cloud.ribbon.handle.DefaultResponseErrorHandler;
 import com.cloud.ribbon.interceptor.RibbonInterceptor;
 
 /**
@@ -59,18 +60,19 @@ public class RibbonConfiguration
                 httpRequestFactory.setReadTimeout(readTimeout);
             }
         }
-        
-        return new RestTemplate(httpRequestFactory);
+        RestTemplate restTemplate = new RestTemplate(httpRequestFactory);
+        restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
+        return restTemplate;
     }
     
-    @Bean
-    public RibbonInterceptor getRibbonInterceptor(
-          LoadBalancerClient loadBalancerClient,
-          LoadBalancerRequestFactory requestFactory,
-          LoadBalancedRetryFactory loadBalancedRetryFactory) {
-     
-       return new RibbonInterceptor(loadBalancerClient, 
-              requestFactory, loadBalancedRetryFactory);
-  }
+	/*@Bean
+	public RibbonInterceptor getRibbonInterceptor(
+	      LoadBalancerClient loadBalancerClient,
+	      LoadBalancerRequestFactory requestFactory,
+	      LoadBalancedRetryFactory loadBalancedRetryFactory) {
+	 
+	   return new RibbonInterceptor(loadBalancerClient, 
+	          requestFactory, loadBalancedRetryFactory);
+	}*/
     
 }

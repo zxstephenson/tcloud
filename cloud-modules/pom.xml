@@ -33,6 +33,8 @@
     <module>cloud-access</module>
     <module>cloud-security</module>
     <module>cloud-shiro</module>
+    <module>cloud-gray</module>
+    <module>cloud-dts</module>
   </modules>
   
 </project>

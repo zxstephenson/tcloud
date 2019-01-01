@@ -43,10 +43,10 @@ public class TestController
     
     @RequestMapping("/sayHello")
     public String sayHello(){
-        logger.info("=============before");
-        String result = ribbonClient.remoteForGet("http://helloService/getPort", new HashMap<String, String>(), String.class);
-        logger.info("=============after = " + result);
-        return result;
+//        logger.info("=============before");
+//        String result = ribbonClient.getForObject("http://helloService/getPort", new HashMap<String, String>(), String.class);
+//        logger.info("=============after = " + result);
+        return "";
     }
     
     

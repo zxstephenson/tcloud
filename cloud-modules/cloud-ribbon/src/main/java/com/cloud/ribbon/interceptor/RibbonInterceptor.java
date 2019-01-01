@@ -17,7 +17,6 @@ package com.cloud.ribbon.interceptor;
  */
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -63,8 +62,8 @@ public class RibbonInterceptor implements ClientHttpRequestInterceptor {
     private RibbonProperties ribbonProperties;
     
     public RibbonInterceptor(LoadBalancerClient loadBalancer,
-                                        LoadBalancerRequestFactory requestFactory,
-                                        LoadBalancedRetryFactory lbRetryFactory) {
+	            LoadBalancerRequestFactory requestFactory,
+	            LoadBalancedRetryFactory lbRetryFactory) {
         this.loadBalancer = loadBalancer;
         this.requestFactory = requestFactory;
         this.lbRetryFactory = lbRetryFactory;
@@ -73,7 +72,7 @@ public class RibbonInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(final HttpRequest request, final byte[] body,
-                                        final ClientHttpRequestExecution execution) throws IOException {
+                    final ClientHttpRequestExecution execution) throws IOException {
         final URI originalUri = request.getURI();
         final String serviceName = originalUri.getHost();
         Assert.state(serviceName != null, "Request URI does not contain a valid hostname: " + originalUri);

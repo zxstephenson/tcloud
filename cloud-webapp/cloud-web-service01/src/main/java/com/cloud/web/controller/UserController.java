@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 //import com.cloud.bus.producer.clients.ProducerClient;
 import com.cloud.common.bean.RequestData;
 import com.cloud.common.bean.RequestHeader;
+import com.cloud.common.bean.ResponseData;
 import com.cloud.common.bean.User;
 import com.cloud.ribbon.client.RibbonClient;
 
@@ -50,7 +51,7 @@ public class UserController
         requestBody.put("username", "zhangxin");
         requestData.setHead(requestHeader);
         requestData.setBody(requestBody);
-        return ribbonClient.remoteForPost("cloud-service03", requestData);
+        return ribbonClient.postForObject("cloud-service03", requestData, ResponseData.class);
     }
     
     @GetMapping("/testBus")

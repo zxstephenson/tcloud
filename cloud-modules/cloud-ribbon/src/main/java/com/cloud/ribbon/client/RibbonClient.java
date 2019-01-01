@@ -3,12 +3,14 @@ package com.cloud.ribbon.client;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.cloud.common.bean.RequestData;
-import com.cloud.common.bean.ResponseData;
 
 /**
  * 〈一句话功能简述〉
@@ -24,52 +26,135 @@ public class RibbonClient
     private RestTemplate restTemplate;
 
     /**
-     * post请求
-     * 架构内服务调用，传入被调服务的服务名，请求对象参数RequestData
+     * GET 请求，返回<T>类型对象
      * @param serviceId
      * @param requestData
+     * @param responseType
      * @return
      */
-    public ResponseData remoteForPost(String serviceId, RequestData requestData){
-        StringBuilder url = new StringBuilder();
-        url.append("http://").append(serviceId).append("/service");
-//        return restTemplate.postForObject(url.toString(), requestData, ResponseData.class);
-        ResponseEntity<ResponseData> responseEntity = restTemplate.postForEntity(url.toString(), requestData, ResponseData.class);
-        System.err.println("*************");
-        System.err.println("*************getStatusCodeValue = " + responseEntity.getStatusCodeValue());
-        System.err.println("*************");
-        return responseEntity.getBody();
+    public <T> T getForObject(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	
+    	ResponseEntity<T> responseEntity = getForEntity(serviceId, requestData, responseType);
+    	return responseEntity.getBody();
     }
-
+    
+    /**
+     * GET 请求，返回ResponseEntity<T>对象
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> ResponseEntity<T> getForEntity(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	
+    	StringBuilder url = new StringBuilder();
+        url.append("http://").append(serviceId).append("/service");
+    	return request(url.toString(), HttpMethod.GET, requestData, responseType, null);
+    }
+    
+    /**
+     * POST 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> T postForObject(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	ResponseEntity<T> responseEntity = postForEntity(serviceId, requestData, responseType);
+    	return responseEntity.getBody();
+    }
+    
+    /**
+     * POST 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> ResponseEntity<T> postForEntity(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	StringBuilder url = new StringBuilder();
+        url.append("http://").append(serviceId).append("/service");
+    	return request(url.toString(), HttpMethod.POST, requestData, responseType, null);
+    }
+    
+    /**
+     * PUT 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> T putForObject(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	ResponseEntity<T> responseEntity = putForEntity(serviceId, requestData, responseType);
+    	return responseEntity.getBody();
+    }
+    
+    /**
+     * PUT 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> ResponseEntity<T> putForEntity(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	StringBuilder url = new StringBuilder();
+        url.append("http://").append(serviceId).append("/service");
+    	return request(url.toString(), HttpMethod.PUT, requestData, responseType, null);
+    }
+    
+    /**
+     * DELETE 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> T deleteForObject(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	ResponseEntity<T> responseEntity = deleteForEntity(serviceId, requestData, responseType);
+    	return responseEntity.getBody();
+    }
+    
+    /**
+     * DELETE 请求
+     * @param serviceId
+     * @param requestData
+     * @param responseType
+     * @return
+     */
+    public <T> ResponseEntity<T> deleteForEntity(String serviceId, RequestData requestData,
+    		Class<T> responseType){
+    	StringBuilder url = new StringBuilder();
+        url.append("http://").append(serviceId).append("/service");
+    	return request(url.toString(), HttpMethod.DELETE, requestData, responseType, null);
+    }
+    
     /**
      * 
-     * @param url
-     * @param obj
-     * @param clazz
+     * @param url			请求url
+     * @param method		请求方法
+     * @param requestData	请求参数对象
+     * @param responseType	请求响应类型
+     * @param headers		请求中HTTP header信息
      * @return
      */
-    public <T> T remoteForPost(String url, Object requestObj, 
-            Class<T> responseType, Map<String, ?> uriVariables){
-        
-        return restTemplate.postForObject(url, requestObj, responseType, uriVariables);
+    public <T> ResponseEntity<T> request(String url, HttpMethod method, RequestData requestData,
+    		Class<T> responseType, Map<String, String> headers){
+    	HttpHeaders httpHeaders = new HttpHeaders();
+        if(headers != null && !headers.isEmpty()){
+        	
+	        for(Map.Entry<String, String> entry : headers.entrySet()){
+	        	httpHeaders.add(entry.getKey(), entry.getValue());
+	        }
+        }
+    	HttpEntity<RequestData> requestEntity = new HttpEntity<RequestData>(requestData, httpHeaders);
+    	return restTemplate.exchange(url, method, requestEntity, responseType);
     }
-    
-    
-    public ResponseData remoteForGet(String serviceId, RequestData requestData){
-        StringBuilder url = new StringBuilder();
-        url.append("http://").append(serviceId).append("/service");
-        return restTemplate.getForObject(url.toString(), ResponseData.class, requestData);
-    }
-    
-    /**
-     * get请求
-     * @param url
-     * @param params
-     * @return
-     */
-    public <T> T remoteForGet(String url, Map<String, ?> params, Class<T> responseType){
-        return restTemplate.getForObject(url, responseType, params);
-    }
-    
     
 }
