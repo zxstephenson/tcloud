@@ -1,0 +1,15 @@
+server:
+  port: 8002
+  
+eureka:
+#  instance:
+#    metadata-map:
+#      lanch: 1
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: cloud-service01
+  

@@ -24,5 +24,23 @@ public interface Constants
     
     //散列迭代次数
     public static final int HASH_ITERATIONS = 2; 
-  
+
+    public final static String REDIS_CONNECTION_ERROR_CODE = "-2252";
+    
+    public final static String REDIS_CONNECTION_ERROR_MSG = "redis连接创建失败";
+    
+    public final static String REDIS_EXCUTE_ERROR_CODE = "-2253";
+    
+    public final static String REDIS_EXCUTE_ERROR_MSG = "redis操作执行失败";
+    
+    public final static String REDIS_CONFIG_ERROR_CODE = "-2257";
+    
+    public final static String REDIS_CONFIG_ERROR_MSG = "未配置redis参数[{0}]值";
+    
+    /**
+     * 服务灰度规则Redis中存储的Key值
+     */
+    public static final String JMSA_GRAY_SERVICES_RULES = "JMSA:GRAY:SERVICES:RULES";
+
 }
+

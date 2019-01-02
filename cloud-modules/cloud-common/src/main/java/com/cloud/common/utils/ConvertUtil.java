@@ -2,6 +2,7 @@ package com.cloud.common.utils;
 
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanMap;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
@@ -11,7 +12,7 @@ import org.apache.commons.beanutils.BeanUtils;
  * @version   3.1.0 2018年9月27日
  */
 
-public class ObjectConvertUtil
+public class ConvertUtil
 {
     /**
      * 将map转换为一个javabean对象
@@ -42,7 +43,12 @@ public class ObjectConvertUtil
         if (obj == null){
             return null;
         }
-        return new org.apache.commons.beanutils.BeanMap(obj);
+        return new BeanMap(obj);
     }
 
+    public static <T> T convertToObject(Object object, Class<T> clazz){
+        String jsonData = JsonUtil.beanToJson(object);
+        return JsonUtil.jsonToBean(jsonData, clazz);
+    }
+    
 }

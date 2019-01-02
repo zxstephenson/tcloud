@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.szkingdom.jros.msf.gray.GrayAutoConfiguration

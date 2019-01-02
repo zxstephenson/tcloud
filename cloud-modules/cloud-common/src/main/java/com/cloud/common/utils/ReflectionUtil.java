@@ -234,5 +234,28 @@ public class ReflectionUtil
         return null;  
     }  
 
+    /**
+     * 创建对象
+     * @param className
+     * @return
+     */
+    public static Object createInstance(String className){
+        try
+        {
+            if(StringUtil.isEmpty(className))
+            {
+                return null;
+            }
+            
+            Class<?> clazz = Class.forName(className);
+            Object instance = clazz.newInstance();
+            return instance;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
     
 }

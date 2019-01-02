@@ -7,21 +7,29 @@
 
 package com.cloud.cacheL2.lock;
 
+import com.cloud.cacheL2.exception.RedisDBException;
+
 public class DistributeLockTest{
     public static void main(String[] args)
     {
-        RedisLock redisLock = new RedisLock("redisLockKey");
+        DTSLock redisLock = new DTSLock("redisLockKey");
         
         try
         {
             if(redisLock.lock()){
                 //需要加锁处理的业务逻辑
             }
-        } catch (InterruptedException e)
+        } catch (RedisDBException e)
         {
             e.printStackTrace();
         }finally{
-            redisLock.unlock();
+            try
+            {
+                redisLock.unlock();
+            } catch (RedisDBException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }

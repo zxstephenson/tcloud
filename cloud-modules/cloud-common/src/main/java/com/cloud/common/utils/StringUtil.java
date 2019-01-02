@@ -56,4 +56,20 @@ public class StringUtil
     {
         return (str != null && !str.isEmpty());
     }
+    
+    /**
+     * 检查输入字符串是否为一个数值类型
+     * @param str
+     * @return 如果输入为一个数值类型返回true，相反返回false
+     */
+    public static boolean isNumeric(String str)
+    {
+        if (str != null && !"".equals(str.trim()))
+        {
+            return str.matches("^[0-9]*$");
+        } else
+        {
+            return false;
+        }
+    }
 }

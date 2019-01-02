@@ -1,0 +1,29 @@
+server:
+  port: 8001
+  
+eureka:
+#  instance:
+#    metadata-map:
+#      lanch: 1
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: cloud-service01
+  
+jisp:
+  redis:
+    # host-and-port: 192.168.8.226-7000,192.168.8.226-7001,192.168.8.226-7002,192.168.8.226-7003,192.168.8.226-7004,192.168.8.226-7005
+    # 定义redis服务的地址和端口号配置格式：host-port，如果是redis集群可以配置多个host-port用逗号隔开
+    host-and-port: 192.168.8.176-6380
+    pool:
+      max-idle: 50
+      min-idle: 10
+      max-active: 50
+      max-wait: 1000
+    connection-timeout: 2000
+    socket-timeout: 2000
+    max-attempts: 3
+    password:
