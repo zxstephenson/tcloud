@@ -59,7 +59,7 @@ public class GrayLoadBalancer extends ZoneAwareLoadBalancer<Server>
             grayServiceInfo = map.get(serviceId.toUpperCase());
         }
 
-        if (grayServiceInfo == null || !grayServiceInfo.isGrayable())
+        if (grayServiceInfo == null || !grayServiceInfo.isGrayable() || grayServiceInfo.getStrategyInfo() == null)
         {
             return super.chooseServer(key);
         }

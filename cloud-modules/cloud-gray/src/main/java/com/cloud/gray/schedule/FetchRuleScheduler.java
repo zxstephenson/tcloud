@@ -18,7 +18,7 @@ import com.cloud.gray.bean.GrayServicesRulesInfo;
  * @version 3.1.0 2018年12月26日
  */
 @Component
-public class Scheduler
+public class FetchRuleScheduler
 {
     @Autowired
     private JedisCommands jedisCommands;
@@ -29,7 +29,7 @@ public class Scheduler
     /**
      * 获取服务的灰度策略数据，每两分钟从redis中获取一次
      */
-    @Scheduled(fixedDelay = 2 * 60 * 1000)
+    @Scheduled(fixedDelay = 2 * 60 * 1000, initialDelay=2 * 60 * 1000)
     public GrayServicesRulesInfo scheduleFetchServiceGrayRules()
     {
         try
@@ -37,9 +37,13 @@ public class Scheduler
             byte[] object = jedisCommands.get(SerializationUtils.serialize(Constants.JMSA_GRAY_SERVICES_RULES));
             if(object == null)
             {
-                return null;
+                return grayServicesRulesInfo;
             }
-            grayServicesRulesInfo = ConvertUtil.convertToObject(SerializationUtils.deserialize(object), GrayServicesRulesInfo.class);
+            GrayServicesRulesInfo newGrayServicesRulesInfo = ConvertUtil.convertToObject(SerializationUtils.deserialize(object), GrayServicesRulesInfo.class);
+            if(newGrayServicesRulesInfo != null)
+            {
+                grayServicesRulesInfo = newGrayServicesRulesInfo;
+            }
             System.out.println("===>" + this.getClass() + " : " + JsonUtil.beanToJson(grayServicesRulesInfo));
             return grayServicesRulesInfo;
         } catch (Exception e)
