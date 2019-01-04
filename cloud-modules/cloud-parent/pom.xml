@@ -23,6 +23,11 @@
 	  <spring-cloud.version>Finchley.SR1</spring-cloud.version>
 	  <shiro.version>1.4.0</shiro.version>
 	  <druid.version>1.1.12</druid.version>
+	  <fastjson.version>1.2.45</fastjson.version>
+	  <commons-beanutils.version>1.9.3</commons-beanutils.version>
+	  <commons-collections.version>3.2.2</commons-collections.version>
+	  <commons-configuration.version>1.10</commons-configuration.version>
+	  <commons-dbcp.version>1.4</commons-dbcp.version>
 	</properties>
 
 
@@ -36,6 +41,26 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+			    <groupId>commons-dbcp</groupId>
+			    <artifactId>commons-dbcp</artifactId>
+			    <version>${commons-dbcp.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>commons-configuration</groupId>
+	            <artifactId>commons-configuration</artifactId>
+	            <version>${commons-configuration.version}</version>
+	        </dependency>
+			<dependency>
+			    <groupId>commons-beanutils</groupId>
+			    <artifactId>commons-beanutils</artifactId>
+			    <version>${commons-beanutils.version}</version>
+			</dependency>
+			 <dependency>
+	            <groupId>commons-collections</groupId>
+	            <artifactId>commons-collections</artifactId>
+	            <version>${commons-collections.version}</version>
+	        </dependency>
 			<dependency>
 				<groupId>com.cloud</groupId>
 	  			<artifactId>cloud-common</artifactId>
@@ -107,6 +132,31 @@
 				<version>${cloud.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.cloud</groupId>
+				<artifactId>cloud-dts</artifactId>
+				<version>${cloud.version}</version>
+			</dependency>
+			<dependency>
+	        	<groupId>com.cloud</groupId>
+    	    	<artifactId>cloud-tx-core</artifactId>
+    	    	<version>${cloud.version}</version>
+        	</dependency>
+        	<dependency>
+	        	<groupId>com.cloud</groupId>
+    	    	<artifactId>cloud-tx-plugins-db</artifactId>
+    	    	<version>${cloud.version}</version>
+        	</dependency>
+        	<dependency>
+	        	<groupId>com.cloud</groupId>
+    	    	<artifactId>cloud-transaction-springcloud</artifactId>
+    	    	<version>${cloud.version}</version>
+        	</dependency>
+			<dependency>
+	        	<groupId>com.cloud</groupId>
+    	    	<artifactId>cloud-tx-client</artifactId>
+    	    	<version>${cloud.version}</version>
+        	</dependency>
+			<dependency>
 				<groupId>redis.clients</groupId>
 	      		<artifactId>jedis</artifactId>
 	      		<version>${jedis.version}</version>
@@ -125,6 +175,12 @@
 			    <groupId>com.alibaba</groupId>
 			    <artifactId>druid</artifactId>
 			    <version>${druid.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
 			</dependency>
 		</dependencies>
 			

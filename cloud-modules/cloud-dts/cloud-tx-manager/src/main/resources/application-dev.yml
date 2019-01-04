@@ -1,0 +1,53 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+server:
+  port: 8899
+spring:
+  application:
+    name: tx-manager  #tx-manager不得修改
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/
+  redis:
+#    cluster:   #redis集群环境配置
+#      nodes:
+#        - 127.0.0.1:7001
+#        - 127.0.0.1:7002
+#        - 127.0.0.1:7003
+      
+    host: 192.168.8.176   #redis单节点环境配置
+    port: 6380
+    password: 
+    pool:
+      maxActive: 20
+      maxIdle: 5
+      maxWait: -1
+      minIdle: 0
+    timeout: 0
+
+tm:
+  compensate:
+    auto: false
+    maxWaitTime: 5000
+    notifyUrl: http://ip:port/path
+    tryTime: 30
+  redis:
+    #存储到redis下的数据最大保存时间（单位：秒）
+    #该字段仅代表的事务模块数据的最大保存时间，补偿数据会永久保存。
+    savemaxtime: 30
+  socket:
+    #socket server Socket对外服务端口
+    #TxManager的LCN协议的端口
+    port: 9999
+    #最大socket连接数
+    #TxManager最大允许的建立连接数量
+    maxconnection: 100
+  transaction:
+    netty:
+      #该字段代表的是Tx-Client模块与TxManager模块之间的最大通讯时间，超过该时间未响应本次请求失败。
+      #通讯时间是指：发起方与响应方之间完成一次的通讯时间。
+      delaytime: 5  #单位：秒
+      hearttime: 15 #业务模块与TxManager之间通讯的心跳时间（单位：秒）

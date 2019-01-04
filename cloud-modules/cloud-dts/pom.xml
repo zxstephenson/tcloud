@@ -3,7 +3,7 @@
 	
 	<parent>
 		<groupId>com.cloud</groupId>
-		<artifactId>cloud-modules</artifactId>
+		<artifactId>cloud-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
@@ -14,8 +14,12 @@
 	  <java.version>1.8</java.version>
 	</properties>
 	
-	
-	<dependencies>
-	
-	</dependencies>
+	<packaging>pom</packaging>
+	<modules>
+		<module>cloud-tx-client</module>
+		<module>cloud-tx-manager</module>
+		<module>cloud-tx-plugins-db</module>
+		<module>cloud-tx-core</module>
+		<module>cloud-transaction-springcloud</module>
+	</modules>
 </project>
