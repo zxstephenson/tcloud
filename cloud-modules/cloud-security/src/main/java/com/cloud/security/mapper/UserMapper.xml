@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.security.mapper.UserMapper">
+
+	<resultMap type="UserInfo" id="findUserMap">
+		<id column="id" property="userId" javaType="string"/>
+		<result column="username" property="username" javaType="string"/>
+		<result column="password" property="password" javaType="string"/>
+		<result column="credentialsalt" property="credentialsalt" javaType="string"/>
+	</resultMap>
+
+	<select id="findUserByName" parameterType="string" resultMap="findUserMap">
+		select id, username, password, credentialsalt from user where username=#{username}
+	</select>
+	
+	<select id="findRolesByUserId" parameterType="string" resultType="Role">
+		select r.id as roleId,r.rolename as roleName 
+			from userrole ur join role r on ur.roleid=r.id
+			where ur.userid=#{userId}
+	</select>
+
+	<insert id="addUser" parameterType="UserInfo">
+		insert into user(id, username, password) values(#{userId}, #{username}, #{password})
+	</insert>
+
+
+	<resultMap type="PermissionRoleInfo" id="permissionRoleMap">
+		<result property="resource" column="permission" javaType="String"/>
+		<collection property="roleName" ofType="String" javaType="List">
+			<result column="rolename"/>
+		</collection>
+	</resultMap>
+
+	<select id="queryAllPermissionRoleInfo" resultMap="permissionRoleMap">
+		select r.rolename, t.permission from role r 
+			right join 
+			(
+				select rp.roleid, p.permission from rolepermission rp 
+				right join permission p on rp.permissionId=p.id
+			) t on r.id=t.roleid
+	
+	</select>
+
+
+
+</mapper>
